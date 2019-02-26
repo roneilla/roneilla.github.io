@@ -1,25 +1,19 @@
 <!DOCTYPE html>
-<html>
 
-<head>
 
-    <meta name="viewport" content="width=device-width, user-scalable=no, minimum-scale=1.0, maximum-scale=1.0">
-    <!-- three.js library -->
-    <script src="build/three.min.js"></script>
-    <script src="build/stats.min.js"></script>
-    <!-- ar.js -->
-    <script src="https://jeromeetienne.github.io/AR.js/three.js/build/ar.js"></script>
-    <script>
-        //        THREEx.ArToolkitContext.baseURL = '../'
+<meta name="viewport" content="width=device-width, user-scalable=no, minimum-scale=1.0, maximum-scale=1.0">
+<!-- three.js library -->
+<script src="build/three.min.js"></script>
+<script src="build/stats.min.js"></script>
+<!-- ar.js -->
+<script src="https://jeromeetienne.github.io/AR.js/three.js/build/ar.js"></script>
+<script>
+    //        THREEx.ArToolkitContext.baseURL = '../'
 
-    </script>
+</script>
 
-</head>
 
 <body style='margin : 0px; overflow: hidden; font-family: Monospace;'>
-    <video width="1920" height="1080" id="video">
-        <source src="video/video.mp4" type="video/mp4">
-    </video>
     <div style='position: absolute; top: 10px; width:100%; text-align: center; z-index: 1;'>
         <a href="https://github.com/jeromeetienne/AR.js/" target="_blank">AR.js</a> - three.js mobile performance
         <br />
@@ -124,7 +118,7 @@
         scene.add(markerRoot)
         var artoolkitMarker = new THREEx.ArMarkerControls(arToolkitContext, markerRoot, {
             type: 'pattern',
-            patternUrl: 'data/pattern-marker3.patt'
+            patternUrl: 'data/pattern-marker4.patt'
             //            patternUrl: THREEx.ArToolkitContext.baseURL + '../data/data/patt.hiro'
             // patternUrl : THREEx.ArToolkitContext.baseURL + '../data/data/patt.kanji'
         })
@@ -146,14 +140,26 @@
 
         var arWorldRoot = smoothedRoot
 
-        var video = document.getElementById('video');
+        // add a torus knot	
+        var geometry = new THREE.CubeGeometry(1, 1, 1);
+        var material = new THREE.MeshNormalMaterial({
+            transparent: true,
+            opacity: 0.5,
+            side: THREE.DoubleSide
+        });
+        var mesh = new THREE.Mesh(geometry, material);
+        mesh.position.y = geometry.parameters.height / 2
+        arWorldRoot.add(mesh);
 
-        var texture = new THREE.VideoTexture(video);
-        texture.minFilter = THREE.LinearFilter;
-        texture.magFilter = THREE.LinearFilter;
-        texture.format = THREE.RGBFormat;
+        var geometry = new THREE.TorusKnotGeometry(0.3, 0.1, 64, 16);
+        var material = new THREE.MeshNormalMaterial();
+        var mesh = new THREE.Mesh(geometry, material);
+        mesh.position.y = 0.5
+        arWorldRoot.add(mesh);
 
-
+        onRenderFcts.push(function() {
+            mesh.rotation.x += 0.1
+        })
 
         //////////////////////////////////////////////////////////////////////////////////
         //		render the whole thing on the page
@@ -183,5 +189,3 @@
 
     </script>
 </body>
-
-</html>

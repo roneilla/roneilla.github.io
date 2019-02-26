@@ -111,32 +111,16 @@
         })
 
 
-
         ////////////////////////////////////////////////////////////////////////////////
         //          Create a ArMarkerControls
         ////////////////////////////////////////////////////////////////////////////////
 
-        //        var markerRoot = new THREE.Group
-        //        scene.add(markerRoot)
-        //        var artoolkitMarker = new THREEx.ArMarkerControls(arToolkitContext, markerRoot, {
-        //            type: 'pattern',
-        //            patternUrl: THREEx.ArToolkitContext.baseURL + 'data/pattern-marker.patt'
-        //            //            patternUrl: THREEx.ArToolkitContext.baseURL + '../data/data/patt.hiro'
-        //            // patternUrl : THREEx.ArToolkitContext.baseURL + '../data/data/patt.kanji'
-        //        })
-
         var markerRoot = new THREE.Group
         scene.add(markerRoot)
-
-        var imageURL = 'data/marker.png'
-        THREEx.ArPatternFile.encodeImageURL(imageURL, function onComplete(patternFileString) {
-            var patternURL = 'data:text/plain;base64,' + btoa(patternFileString)
-            // create THREEx.ArMarkerControls
-            var markerControls = new THREEx.ArMarkerControls(arToolkitContext, markerRoot, {
-                type: 'pattern',
-                patternUrl: 'data/pattern-marker.patt',
-                patternUrl: patternURL,
-            })
+        var artoolkitMarker = new THREEx.ArMarkerControls(arToolkitContext, markerRoot, {
+            type: 'pattern',
+            patternUrl: THREEx.ArToolkitContext.baseURL + '../data/data/patt.hiro'
+            // patternUrl : THREEx.ArToolkitContext.baseURL + '../data/data/patt.kanji'
         })
 
         // build a smoothedControls

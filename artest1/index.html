@@ -1,14 +1,17 @@
 <!DOCTYPE html>
+
+
 <meta name="viewport" content="width=device-width, user-scalable=no, minimum-scale=1.0, maximum-scale=1.0">
 <!-- three.js library -->
-<script src="build/three.min.js"></script>
-<script src="build/stats.js"></script>
+<script src="/build/three.min.js"></script>
+<script src="/build/stats.js"></script>
 <!-- ar.js -->
 <script src="https://jeromeetienne.github.io/AR.js/three.js/build/ar.js"></script>
 <script>
-    THREEx.ArToolkitContext.baseURL = '../'
+    //        THREEx.ArToolkitContext.baseURL = '../'
 
 </script>
+
 
 <body style='margin : 0px; overflow: hidden; font-family: Monospace;'>
     <div style='position: absolute; top: 10px; width:100%; text-align: center; z-index: 1;'>
@@ -53,7 +56,6 @@
         ////////////////////////////////////////////////////////////////////////////////
 
         var arToolkitSource = new THREEx.ArToolkitSource({
-            // to read from the webcam 
             sourceType: 'webcam',
 
             // to read from an image
@@ -88,7 +90,7 @@
 
         // create atToolkitContext
         var arToolkitContext = new THREEx.ArToolkitContext({
-            cameraParametersUrl: THREEx.ArToolkitContext.baseURL + '../data/data/camera_para.dat',
+            cameraParametersUrl: '../../data/data/camera_para.dat',
             detectionMode: 'mono',
             maxDetectionRate: 30,
             canvasWidth: 80 * 3,

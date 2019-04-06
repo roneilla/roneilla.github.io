@@ -1,0 +1,90 @@
+body {
+    overflow: hidden;
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    background-image: url("../img/background.svg");
+}
+
+#printerSection {
+    /*    background-color: yellow;*/
+    width: 50vw;
+    height: 100vh;
+    float: left;
+}
+
+.printer__title {
+    /*    background-color: green;*/
+    height: 20vh;
+    text-align: center;
+    padding: 10px;
+}
+
+#title {
+    font-size: 50px;
+}
+
+#description {
+    font-size: 24px;
+}
+
+#printer {
+    /*    background-color: pink;*/
+    height: 50vh;
+    width: 50%;
+    float: left;
+}
+
+#wasteDeposit {
+    /*    background-color: coral;*/
+    height: 50vh;
+    width: 50%;
+    float: left;
+}
+
+#button {
+    height: 20vh;
+    /*    background-color: aqua;*/
+    float: left;
+    width: 100%;
+
+}
+
+#button h1 {
+    text-align: center;
+    border-radius: 100px;
+    margin: 50px 100px;
+}
+
+.waste {
+    /*    background-color: red;*/
+    float: left;
+    width: 25vw;
+    height: 100vh;
+}
+
+.waste__container {
+    padding-top: 15vh;
+}
+
+.waste__item {
+    width: 10%;
+    margin: 10vh 0 0 50%;
+}
+
+.creation {
+    /*    background-color: blue;*/
+    width: 25vw;
+    height: 100vh;
+    float: left;
+}
+
+.creation__container {
+    padding-top: 15vh;
+}
+
+.creation__item {
+    width: 20%;
+    float: right;
+    margin: 10vh 40% 0 0;
+}

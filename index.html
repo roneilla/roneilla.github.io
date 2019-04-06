@@ -1,148 +1,48 @@
 <!DOCTYPE html>
+<html lang="">
 
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title></title>
+    <link rel="stylesheet" href="css/style.css">
+</head>
 
-<meta name="viewport" content="width=device-width, user-scalable=no, minimum-scale=1.0, maximum-scale=1.0">
-<!-- three.js library -->
-<script src="build/three.min.js"></script>
-<script src="build/stats.min.js"></script>
-<!-- ar.js -->
-<script src="https://jeromeetienne.github.io/AR.js/three.js/build/ar.js"></script>
-<script>
-    //        THREEx.ArToolkitContext.baseURL = '../'
-
-</script>
-
-
-<body style='margin : 0px; overflow: hidden; font-family: Monospace;'>
-    <div style='position: absolute; top: 10px; width:100%; text-align: center; z-index: 1;'>
-        <a href="https://github.com/jeromeetienne/AR.js/" target="_blank">AR.js</a> - three.js mobile performance
-        <br />
-        Contact me any time at <a href='https://twitter.com/jerome_etienne' target='_blank'>@jerome_etienne</a>
+<body>
+    <div class="waste">
+        <div class="waste__container">
+            <div class="waste__instructions">
+                Click on the item to add it into the deposit.
+            </div>
+            <img class="waste__item" src="img/bottle.png" alt="">
+            <img class="waste__item" src="img/straw.png" alt="">
+            <img class="waste__item" src="img/yogurtcup.png" alt="">
+        </div>
     </div>
-    <script>
-        var renderer = new THREE.WebGLRenderer({
-            // antialias	: true,
-            alpha: true
-        });
-        renderer.setClearColor(new THREE.Color('lightgrey'), 0)
-        renderer.setSize(window.innerWidth, window.innerHeight);
-        renderer.domElement.style.position = 'absolute'
-        renderer.domElement.style.top = '0px'
-        renderer.domElement.style.left = '0px'
-        document.body.appendChild(renderer.domElement);
+    <div id="printerSection">
+        <div class="printer__title">
+            <div id="title">Title</div>
+            <div id="description">Add some nice intro text here.</div>
+        </div>
 
-        var onRenderFcts = [];
+        <div id="wasteDeposit"></div>
+        <div id="printer"></div>
+        <div id="button">
+            <h1>Create</h1>
+        </div>
+    </div>
+    <div class="creation">
+        <div class="creation__container">
+            <div class="creation__instruction">
+                Click on the item you'd like to create.
+            </div>
+            <img class="creation__item" src="img/bowl.png" alt="">
+            <img class="creation__item" src="img/cup.png" alt="" id="cup">
+            <img class="creation__item" src="img/clock.png" alt="" id="clock">
+        </div>
+    </div>
+    <script src="js/script.js"></script>
 
-        var scene = new THREE.Scene();
-
-
-        var camera = new THREE.Camera();
-        scene.add(camera);
-
-        var arToolkitSource = new THREEx.ArToolkitSource({
-            sourceType: 'webcam',
-
-
-        })
-
-        arToolkitSource.init(function onReady() {
-            onResize()
-        })
-
-        window.addEventListener('resize', function() {
-            onResize()
-        })
-
-        function onResize() {
-            arToolkitSource.onResize()
-            arToolkitSource.copySizeTo(renderer.domElement)
-            if (arToolkitContext.arController !== null) {
-                arToolkitSource.copySizeTo(arToolkitContext.arController.canvas)
-            }
-        }
-        var arToolkitContext = new THREEx.ArToolkitContext({
-            cameraParametersUrl: '../../data/data/camera_para.dat',
-            detectionMode: 'mono',
-            maxDetectionRate: 30,
-            canvasWidth: 80 * 3,
-            canvasHeight: 60 * 3,
-        })
-
-        arToolkitContext.init(function onCompleted() {
-
-            camera.projectionMatrix.copy(arToolkitContext.getProjectionMatrix());
-        })
-
-
-        onRenderFcts.push(function() {
-            if (arToolkitSource.ready === false) return
-
-            arToolkitContext.update(arToolkitSource.domElement)
-        })
-
-
-
-        var markerRoot = new THREE.Group
-        scene.add(markerRoot)
-        var artoolkitMarker = new THREEx.ArMarkerControls(arToolkitContext, markerRoot, {
-            type: 'pattern',
-            patternUrl: 'data/rainbow.patt'
-        })
-
-        var smoothedRoot = new THREE.Group()
-        scene.add(smoothedRoot)
-        var smoothedControls = new THREEx.ArSmoothedControls(smoothedRoot, {
-            lerpPosition: 0.4,
-            lerpQuaternion: 0.3,
-            lerpScale: 1,
-        })
-        onRenderFcts.push(function(delta) {
-            smoothedControls.update(markerRoot)
-        })
-
-        var arWorldRoot = smoothedRoot
-
-        var geometry = new THREE.CubeGeometry(1, 1, 1);
-        var material = new THREE.MeshNormalMaterial({
-            transparent: true,
-            opacity: 0.5,
-            side: THREE.DoubleSide
-        });
-        var mesh = new THREE.Mesh(geometry, material);
-        mesh.position.y = geometry.parameters.height / 2
-        arWorldRoot.add(mesh);
-
-        onRenderFcts.push(function() {
-            mesh.rotation.x += 0.1
-        })
-
-        var geometry = new THREE.PlaneGeometry()
-
-        //////////////////////////////////////////////////////////////////////////////////
-        //		render the whole thing on the page
-        //////////////////////////////////////////////////////////////////////////////////
-        var stats = new Stats();
-        document.body.appendChild(stats.dom);
-        // render the scene
-        onRenderFcts.push(function() {
-            renderer.render(scene, camera);
-            stats.update();
-        })
-
-        // run the rendering loop
-        var lastTimeMsec = null
-        requestAnimationFrame(function animate(nowMsec) {
-            // keep looping
-            requestAnimationFrame(animate);
-            // measure time
-            lastTimeMsec = lastTimeMsec || nowMsec - 1000 / 60
-            var deltaMsec = Math.min(200, nowMsec - lastTimeMsec)
-            lastTimeMsec = nowMsec
-            // call each update function
-            onRenderFcts.forEach(function(onRenderFct) {
-                onRenderFct(deltaMsec / 1000, nowMsec / 1000)
-            })
-        })
-
-    </script>
 </body>
+
+</html>

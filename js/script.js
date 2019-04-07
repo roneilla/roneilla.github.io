@@ -13,7 +13,9 @@ var cupPop = document.getElementById("popUp__cup");
 var bowlPop = document.getElementById("popUp__bowl");
 var clockPop = document.getElementById("popUp__clock");
 
-var exitButton = document.getElementById("popUp__exit");
+var bowlexit = document.getElementById("exitbowl");
+var cupexit = document.getElementById("exitcup");
+var clockexit = document.getElementById("exitclock");
 
 function wasteAdded() {
     wasteCounter++;
@@ -33,11 +35,10 @@ function wasteAdded() {
             cup.style.backgroundColor = "white";
 
             createButton.addEventListener('click', function popUp() {
-                //                createButton.classList.toggle("printer");
 
                 bowlPop.style.visibility = "visible";
 
-                exitButton.addEventListener('click', function exitPopUp() {
+                bowlexit.addEventListener('click', function exitPopUp() {
                     bowlPop.style.visibility = "hidden";
 
                 })
@@ -61,7 +62,7 @@ function wasteAdded() {
             createButton.addEventListener('click', function popUp() {
                 cupPop.style.visibility = "visible";
 
-                exitButton.addEventListener('click', function exitPopUp() {
+                cupexit.addEventListener('click', function exitPopUp() {
                     cupPop.style.visibility = "hidden";
 
                 })
@@ -87,7 +88,7 @@ function wasteAdded() {
             createButton.addEventListener('click', function popUp() {
                 clockPop.style.visibility = "visible";
 
-                exitButton.addEventListener('click', function exitPopUp() {
+                clockexit.addEventListener('click', function exitPopUp() {
                     clockPop.style.visibility = "hidden";
 
                 })

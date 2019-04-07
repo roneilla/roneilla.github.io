@@ -27,18 +27,18 @@
     visibility: hidden;
 }
 
-#popUp__exit {
+.popUp__exit {
     width: 5vw;
     height: 5vw;
     float: right;
 }
 
-#popUp__exit:hover {
+.popUp__exit:hover {
     opacity: 0.7;
     cursor: pointer;
 }
 
-#popUp__exit:active {
+.popUp__exit:active {
     opacity: 0.5;
     cursor: pointer;
 }

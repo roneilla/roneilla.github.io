@@ -7,53 +7,69 @@
     margin: 10vh 10vw;
     border-radius: 5px;
     border: #3F98D2 solid 1px;
-    padding: 5vh 5vw
+    padding: 5% 5%;
 }
+
+#popUp__bowl {
+    visibility: hidden;
+}
+
 #popUp__cup {
     visibility: hidden;
 }
+#popUp__clock {
+    visibility: hidden;
+}
+
 #popUp__exit {
     width: 5vw;
     height: 5vw;
-    background-color: black;
     float: right;
 }
 
-.popUp__title {
-    color: #3F98D2;
-    font-size: 30px;
-    margin-top: 25vh;
+#popUp__exit:hover {
+    opacity: 0.7;
+    cursor: pointer;
 }
 
-.popUp__description {
-    font-size: 18px;
-    width: 50%;
-    float: left;
-    margin-top: 5vh;
-
+#popUp__exit:active {
+    opacity: 0.5;
+    cursor: pointer;
 }
 
-#popUp__img {
+.popUp__img {
     width: 30%;
-    margin: 10%;
+    margin: 5%;
     margin-top: 20vh;
     float: left;
 }
 
 .popUp__wrapper {
-    width: 50%;
+    width: 40%;
+    float: left;
+    padding: 20vh 0 0 5%;
+}
+
+.popUp__title {
+    color: #3F98D2;
+    font-size: 30px;
+}
+
+.popUp__description {
+    font-size: 18px;
+    margin-top: 5%;
 }
 
 .popUp__learnMore {
     float: left;
     text-align: center;
     border-radius: 100px;
-    margin: 0 34% 0 34%;
     background-color: #3F98D2;
     color: #fff;
-    font-size: 30px;
-    padding: 1%;
-    width: 30%;
+    font-size: 25px;
+    padding: 3%;
+    width: 70%;
+    margin: 5vh 0 0 0;
 }
 
 .popUp__learnMore:hover {
@@ -64,4 +80,8 @@
 .popUp__learnMore:active {
     background-color: #1d5071;
     cursor: pointer;
+}
+
+#img__bowl {
+    margin-top: 30vh;
 }

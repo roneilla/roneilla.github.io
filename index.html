@@ -2,43 +2,62 @@
 <html lang="">
 
 <head>
-    <meta charset="utf-8">
+    <meta charset=" utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title></title>
     <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="css/popup.css">
+    <style>
+        @import url('https://fonts.googleapis.com/css?family=Open+Sans:400,700');
+        @import url('https://fonts.googleapis.com/css?family=Open+Sans');
+    </style>
 </head>
 
 <body>
+    <div id="popUp__cup" class="popUp">
+
+        <div id="popUp__exit">
+            <!-- change to image of X, add event listener to change visibility -->
+        </div>
+        <img src="img/cup.png" id="popUp__img">
+        <div class="popUp__wrapper">
+            <div class="mainText popUp__title">
+                You created something!
+            </div>
+            <div class="subText popUp__description">Using a few waste materials, you were able to create something that can be used for this and this and this.</div>
+            <div class="mainText popUp__learnMore">LEARN MORE</div>
+        </div>
+
+    </div>
     <div class="waste">
         <div class="waste__container">
-            <div class="waste__instructions">
+            <div class="subText waste__instruction">
                 Click on the item to add it into the deposit.
             </div>
-            <img class="waste__item" src="img/bottle.png" alt="">
-            <img class="waste__item" src="img/straw.png" alt="">
-            <img class="waste__item" src="img/yogurtcup.png" alt="">
+            <img class="waste__item" src="img/bottle.png" alt="" id="waste__bottle">
+            <img class="waste__item" src="img/straw.png" alt="" id="waste__straw">
+            <img class="waste__item" src="img/yogurtcup.png" alt="" id="waste__yogurtCup">
         </div>
     </div>
     <div id="printerSection">
         <div class="printer__title">
-            <div id="title">Title</div>
-            <div id="description">Add some nice intro text here.</div>
+            <div class="mainText" id="title">Machine Simulator</div>
+            <div class="subText" id="description">Learn how the new 3d printing technology helps reduce the world's waste!</div>
         </div>
-
-        <div id="wasteDeposit"></div>
-        <div id="printer"></div>
-        <div id="button">
+        <img class="wasteDeposit" src="img/wastedeposit.png" alt="">
+        <img class="printer" src="img/machine.png" alt="">
+        <div class="mainText" id="button">
             <h1>Create</h1>
         </div>
     </div>
     <div class="creation">
         <div class="creation__container">
-            <div class="creation__instruction">
+            <div class="subText creation__instruction">
                 Click on the item you'd like to create.
             </div>
-            <img class="creation__item" src="img/bowl.png" alt="">
-            <img class="creation__item" src="img/cup.png" alt="" id="cup">
-            <img class="creation__item" src="img/clock.png" alt="" id="clock">
+            <img class="creation__item" src="img/bowl.png" alt="" id="creation__bowl">
+            <img class="creation__item" src="img/cup.png" alt="" id="creation__cup">
+            <img class="creation__item" src="img/clock.png" alt="" id="creation__clock">
         </div>
     </div>
     <script src="js/script.js"></script>

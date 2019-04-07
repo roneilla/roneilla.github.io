@@ -15,7 +15,6 @@ var clockPop = document.getElementById("popUp__clock");
 
 var exitButton = document.getElementById("popUp__exit");
 
-
 function wasteAdded() {
     wasteCounter++;
     console.log(wasteCounter);
@@ -94,6 +93,8 @@ function wasteAdded() {
 
         })
     }
+
+    document.getElementById("counter").innerHTML = "Number of Waste Items Selected : " + wasteCounter;
 }
 
 bottle.addEventListener('click', wasteAdded);

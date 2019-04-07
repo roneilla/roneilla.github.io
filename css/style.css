@@ -112,6 +112,7 @@ body {
     border-radius: 10px;
     background-color: white;
 }
+
 .waste__item:hover {
     border: 1px #296b96 solid;
     background-color: #eaeaea;
@@ -123,6 +124,7 @@ body {
     background-color: #3F98D2;
     cursor: pointer;
 }
+
 .creation {
     /*    background-color: blue;*/
     width: 25vw;
@@ -152,17 +154,7 @@ body {
     cursor: no-drop;
 }
 
-/*
-.creation__item:hover {
-    border: 1px #296b96 solid;
-    background-color: #eaeaea;
-    cursor: no-drop;
+#counter {
+    text-align: center;
+    color: #3F98D2;
 }
-*/
-
-/*
-.creation__item:active {
-    border: 1px #3F98D2 solid;
-    background-color: #3F98D2;
-    cursor: pointer;
-}*/

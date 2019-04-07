@@ -33,6 +33,8 @@ function wasteAdded() {
             cup.style.backgroundColor = "white";
 
             createButton.addEventListener('click', function popUp() {
+                //                createButton.classList.toggle("printer");
+
                 bowlPop.style.visibility = "visible";
 
                 exitButton.addEventListener('click', function exitPopUp() {

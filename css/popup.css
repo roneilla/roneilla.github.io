@@ -10,6 +10,11 @@
     padding: 5% 5%;
 }
 
+.mainText a {
+    text-decoration: none;
+    color: white;
+}
+
 #popUp__bowl {
     visibility: hidden;
 }
@@ -17,6 +22,7 @@
 #popUp__cup {
     visibility: hidden;
 }
+
 #popUp__clock {
     visibility: hidden;
 }

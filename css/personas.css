@@ -1,0 +1,88 @@
+.header {
+    float: left;
+    width: 90vw;
+    height: 92vh;
+    margin-top: 6vh;
+    padding: 1vh 5vw;
+}
+
+.header__title {
+    text-align: center;
+    font-family: 'din_alternate_mediumregular';
+    font-size: 70px;
+    margin: 10vh 0 1vh 0;
+}
+
+.header__text {
+    text-align: center;
+    color: #777;
+    font-size: 20px;
+}
+
+.container__personas {
+    margin-top: 40vh;
+}
+
+.personaImg {
+    width: 25%;
+    float: left;
+    opacity: 0.5;
+    filter: saturate(0);
+    z-index: 1;
+}
+
+.personaImg:hover {
+    width: 25%;
+    float: left;
+    opacity: 1;
+    filter: saturate(1);
+    transition: all 0.5s;
+    cursor: pointer;
+}
+
+.container {
+    width: 90vw;
+    height: 85vh;
+    padding: 5vh 5vw;
+    color: #0D263A;
+    margin-top: 100vh;
+    background-color: white;
+    position: absolute;
+}
+
+.persona__name {
+    text-align: center;
+    font-size: 70px;
+}
+
+.persona__type {
+    text-align: center;
+    color: #777;
+    font-size: 20px;
+}
+
+.persona__quote {
+    text-align: center;
+    font-size: 25px;
+    margin-top: 5vh;
+}
+
+.persona__desc {
+    width: 100%;
+}
+
+.persona__summary {
+    font-family: 'din_alternateregular';
+    width: 40%;
+    margin: 5%;
+    float: left;
+    font-size: 18px;
+    line-height: 23px;
+}
+
+#persona__persona1,
+#persona__persona2,
+#persona__persona3,
+#persona__persona4 {
+    visibility: hidden;
+}

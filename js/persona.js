@@ -9,7 +9,7 @@ var persona3desc = document.getElementById("persona__persona3");
 var persona4desc = document.getElementById("persona__persona4");
 
 persona1.addEventListener('click', function viewPersona() {
-    window.scrollBy(0, 800);
+    window.scrollBy(0, 900);
     persona1desc.style.visibility = "visible";
     persona2desc.style.visibility = "hidden";
     persona3desc.style.visibility = "hidden";
@@ -17,7 +17,7 @@ persona1.addEventListener('click', function viewPersona() {
 })
 
 persona2.addEventListener('click', function viewPersona() {
-    window.scrollBy(0, 800);
+    window.scrollBy(0, 900);
     persona2desc.style.visibility = "visible";
     persona1desc.style.visibility = "hidden";
     persona3desc.style.visibility = "hidden";
@@ -25,7 +25,7 @@ persona2.addEventListener('click', function viewPersona() {
 })
 
 persona3.addEventListener('click', function viewPersona() {
-    window.scrollBy(0, 800);
+    window.scrollBy(0, 900);
     persona3desc.style.visibility = "visible";
     persona2desc.style.visibility = "hidden";
     persona1desc.style.visibility = "hidden";
@@ -34,7 +34,7 @@ persona3.addEventListener('click', function viewPersona() {
 })
 
 persona4.addEventListener('click', function viewPersona() {
-    window.scrollBy(0, 800);
+    window.scrollBy(0, 900);
     persona4desc.style.visibility = "visible";
     persona2desc.style.visibility = "hidden";
     persona3desc.style.visibility = "hidden";

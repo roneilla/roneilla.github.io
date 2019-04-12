@@ -45,6 +45,17 @@
 
 .container__gallery {
     margin: 0 5vw;
+    text-align: center;
+}
+
+.container__vidgallery {
+    margin: 100px 5vw 0 5vw;
+    text-align: center;
+    padding: 5px;
+}
+
+video {
+    margin-bottom: 10px;
 }
 
 

@@ -2,7 +2,7 @@
 <html>
 
 <head>
-    <title>VR Test v4</title>
+    <title>AR Experiments</title>
     <script src="https://aframe.io/releases/0.8.2/aframe.min.js"></script>
     <script src="https://cdn.rawgit.com/jeromeetienne/AR.js/1.6.2/aframe/build/aframe-ar.js"></script>
 </head>
@@ -19,16 +19,16 @@
         </a-assets>
         <a-marker-camera type='pattern' url='data/pattern.patt'>
             <!--            <a-collada-model src="#house" position='0 0.5 0' rotation='-90 0 0' scale='0.5 0.5 0.5'></a-collada-model>-->
-            <a-image src="#tree1" position='0 5 0' rotation='0 0 0'></a-image>
-            <a-image src="#tree2" position='0 4 0' rotation='0 0 0'></a-image>
-            <a-image src="#tree3" position='0 3 0' rotation='0 0 0'></a-image>
-            <a-image src="#tree4" position='0 2 0' rotation='0 0 0'></a-image>
-            <a-image src="#tree5" position='0 1 0' rotation='0 0 0'></a-image>
+            <a-image src="#tree1" position='0 5 0' rotation='0 0 90'></a-image>
+            <a-image src="#tree2" position='0 4 0' rotation='0 0 90'></a-image>
+            <a-image src="#tree3" position='0 3 0' rotation='0 0 90'></a-image>
+            <a-image src="#tree4" position='0 2 0' rotation='0 0 90'></a-image>
+            <a-image src="#tree5" position='0 1 0' rotation='0 0 90'></a-image>
         </a-marker-camera>
         <a-entity camera></a-entity>
     </a-scene>
     <script>
-        console.log("A FRAME TEST Version 0.3");
+        console.log("A FRAME TEST Version 0.4");
 
     </script>
 </body>

@@ -1,18 +1,30 @@
 <!doctype HTML>
 <html>
-    <head>
-        <title>VR Test v4</title>
-<script src="https://aframe.io/releases/0.8.2/aframe.min.js"></script>
-<script src="https://cdn.rawgit.com/jeromeetienne/AR.js/1.6.2/aframe/build/aframe-ar.js"></script>
+
+<head>
+    <title>VR Test v4</title>
+    <script src="https://aframe.io/releases/0.8.2/aframe.min.js"></script>
+    <script src="https://cdn.rawgit.com/jeromeetienne/AR.js/1.6.2/aframe/build/aframe-ar.js"></script>
 </head>
+
 <body style='margin : 0px; overflow: hidden;'>
     <a-scene embedded arjs>
         <a-assets>
-        <a-asset-item id="house" src="assets/house.dae"></a-asset-item>
-            </a-assets>
-        <a-marker preset="hiro">
-            <a-collada-model src="#house" position='0 0.5 0' rotation='-90 0 0' scale='0.5 0.5 0.5'></a-collada-model>
-        </a-marker>
+<a-asset-item id="house" src="assets/house.dae"></a-asset-item>
+            <img id="tree1" src="img/tree-01.png">
+            <img id="tree2" src="img/tree-02.png">
+            <img id="tree3" src="img/tree-03.png">
+            <img id="tree4" src="img/tree-04.png">
+            <img id="tree5" src="img/tree-05.png">
+        </a-assets>
+        <a-marker-camera type='pattern' url='data/pattern.patt'>
+<!--            <a-collada-model src="#house" position='0 0.5 0' rotation='-90 0 0' scale='0.5 0.5 0.5'></a-collada-model>-->
+            <a-image src="#tree1" position='0 0 5'></a-image>
+            <a-image src="#tree2" position='0 0 4'></a-image>
+            <a-image src="#tree3" position='0 0 3'></a-image>
+            <a-image src="#tree4" position='0 0 2'></a-image>
+            <a-image src="#tree5" position='0 0 1'></a-image>
+        </a-marker-camera>
         <a-entity camera></a-entity>
     </a-scene>
 </body>

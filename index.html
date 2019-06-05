@@ -1,36 +1,270 @@
-<!doctype HTML>
-<html>
+<!DOCTYPE html>
+<meta name="viewport" content="width=device-width, user-scalable=no, minimum-scale=1.0, maximum-scale=1.0">
 
 <head>
-    <title>AR Experiments</title>
-    <script src="https://aframe.io/releases/0.8.2/aframe.min.js"></script>
-    <script src="https://cdn.rawgit.com/jeromeetienne/AR.js/1.6.2/aframe/build/aframe-ar.js"></script>
+    <!-- three.js library -->
+    <script src='js/three.js'></script>
+    <!-- jsartookit -->
+    <script src="vendor/jsartoolkit5/build/artoolkit.min.js"></script>
+    <script src="vendor/jsartoolkit5/js/artoolkit.api.js"></script>
+    <!-- include threex.artoolkit -->
+    <script src="threex-artoolkitsource.js"></script>
+    <script src="threex-artoolkitcontext.js"></script>
+    <script src="threex-armarkercontrols.js"></script>
+
+    <script>
+        THREEx.ArToolkitContext.baseURL = '/'
+
+    </script>
+    <title>AR Test 1</title>
+    <style>
+        body {
+            background: #e2e2e2;
+            margin: 0px;
+            overflow: hidden;
+            font-family: Helvetica, Arial, Sans-Serif;
+        }
+
+        canvas {
+            position: absolute;
+            top: 0;
+            left: 0;
+        }
+
+        #button {
+            padding: 0;
+            margin: 0;
+            width: 100vw;
+            height: 12vh;
+            float: left;
+            position: relative;
+            text-align: center;
+        }
+
+        #button button {
+            margin-top: 90vh;
+            width: 20%;
+            height: 50%;
+            font-size: 100%;
+            color: white;
+            text-align: center;
+            z-index: 100;
+        }
+
+        #button:hover {
+            cursor: pointer;
+        }
+
+        #leftbutton:active {
+            background-color: green;
+            box-shadow: 0 5px #666;
+            transform: translateY(2px);
+        }
+
+        #rightbutton:active {
+            background-color: red;
+            box-shadow: 0 5px #666;
+            transform: translateY(2px);
+        }
+
+        #leftbutton {
+            width: 100%;
+            float: left;
+            background-color: rgba(150, 150, 150, 0.8);
+            position: relative;
+            margin-left: 15%;
+            border-radius: 5px;
+            line-height: 100%;
+        }
+
+        #rightbutton {
+            width: 100%;
+            float: right;
+            background-color: rgba(150, 150, 150, 0.8);
+            position: relative;
+            margin-right: 15%;
+            border-radius: 5px;
+        }
+
+        #middlebutton {
+            width: 100%;
+            background-color: rgba(150, 150, 150, 0.8);
+            border-radius: 5px;
+            position: inherit;
+        }
+
+    </style>
 </head>
 
-<body style='margin : 0px; overflow: hidden;'>
-    <a-scene embedded arjs>
-        <a-assets>
-            <a-asset-item id="house" src="assets/house.dae"></a-asset-item>
-            <img id="tree1" src="img/tree-01.png">
-            <img id="tree2" src="img/tree-02.png">
-            <img id="tree3" src="img/tree-03.png">
-            <img id="tree4" src="img/tree-04.png">
-            <img id="tree5" src="img/tree-05.png">
-        </a-assets>
-        <a-marker-camera type='pattern' url='data/pattern.patt'>
-            <!--            <a-collada-model src="#house" position='0 0.5 0' rotation='-90 0 0' scale='0.5 0.5 0.5'></a-collada-model>-->
-            <a-image src="#tree1" position='0 0 5' rotation='-90 0 0'></a-image>
-            <a-image src="#tree2" position='0 0 4' rotation='-90 0 0'></a-image>
-            <a-image src="#tree3" position='0 0 3' rotation='-90 0 0'></a-image>
-            <a-image src="#tree4" position='0 0 2' rotation='-90 0 0'></a-image>
-            <a-image src="#tree5" position='0 0 1' rotation='-90 0 0'></a-image>
-        </a-marker-camera>
-        <a-entity camera></a-entity>
-    </a-scene>
+<body>
+    <div id="button">
+        <button id="leftbutton" onclick="Grow()">GROW</button>
+        <button id="middlebutton" onclick="playVideo()">PLAY</button>
+        <button id="rightbutton" onclick="Shrink()">SHRINK</button>
+    </div>
+
     <script>
-        console.log("A FRAME TEST Version 0.7");
+        //BASIC EXAMPLES OF MARKER-BASED AUGMENTED REALITY:
+        //IMAGE, SCALE, POSITION, ROTATION, OPACITY, SOUND, VIDEO, INTERACTIVITY. 
+        //By Lucas Di Monte 2018, contact me on facebook messenger for help.
+        //All the basics are here, use JavaScript and CSS to play around and see what you can come up with.
+        //Please note that you will need a button in order to initialize sound on a mobile device.
+        //This will primarily be designed for a smart phone/tablet, keep that in mind when styling CSS.
+        //Use the mobile emulation mode in Chrome for proper framing.
+
+        ///// Init variables:
+        var renderer, scene, camera;
+        var arToolkitContext, onRenderFcts, arToolkitSource, markerRoot, markerRoot2, markerRoot3, artoolkitMarker, lastTimeMsec;
+        var sprite, sprite2, sprite3, sprite4, sprite5;
+        var params = {
+            opacity: 1
+        };
+        var btext = document.getElementsByTagName("BUTTON")[1].textContent;
+
+
+        ///// Sprite Maps, map your images here:
+        var spriteMap = new THREE.TextureLoader().load("img/tree-01.png");
+        var spriteMaterial = new THREE.SpriteMaterial({
+            map: spriteMap,
+            color: 0xffffff
+        });
+        sprite = new THREE.Sprite(spriteMaterial);
+
+        ///// Initial sprite sizes and locations:
+        sprite.position.set(0, 5, 0);
+        sprite.scale.set(1, 1, 1);
+
+        // layer images
+        var spriteMap2 = new THREE.TextureLoader().load("img/tree-02.png");
+        var spriteMaterial2 = new THREE.SpriteMaterial({
+            map: spriteMap2,
+            color: 0xffffff
+        });
+        sprite2 = new THREE.Sprite(spriteMaterial2);
+        sprite2.position.set(0, 4, 0);
+        sprite2.scale.set(1, 1, 1);
+
+        var spriteMap3 = new THREE.TextureLoader().load("img/tree-03.png");
+        var spriteMaterial3 = new THREE.SpriteMaterial({
+            map: spriteMap3,
+            color: 0xffffff
+        });
+        sprite3 = new THREE.Sprite(spriteMaterial3);
+        sprite3.position.set(0, 3, 0);
+        sprite3.scale.set(1, 1, 1);
+
+        var spriteMap4 = new THREE.TextureLoader().load("img/tree-04.png");
+        var spriteMaterial4 = new THREE.SpriteMaterial({
+            map: spriteMap4,
+            color: 0xffffff
+        });
+        sprite4 = new THREE.Sprite(spriteMaterial4);
+        sprite4.position.set(0, 2, 0);
+        sprite4.scale.set(1, 1, 1);
+
+        var spriteMap5 = new THREE.TextureLoader().load("img/tree-05.png");
+        var spriteMaterial5 = new THREE.SpriteMaterial({
+            map: spriteMap5,
+            color: 0xffffff
+        });
+        sprite5 = new THREE.Sprite(spriteMaterial5);
+        sprite5.position.set(0, 1, 0);
+        sprite5.scale.set(1, 1, 1);
+
+        ///// Custom Functions, these scale on the y-axis, add x and z for complete scaling (as an example).
+        function Grow() {
+            sprite.scale.y += 0.5;
+
+        }
+
+        function Shrink() {
+            sprite.scale.y -= 0.5;
+
+        }
+
+
+        ///// Run Init Function.
+        init();
+
+        ///// Init Renderer, you won't need to touch this, move along.
+        function init() {
+            renderer = new THREE.WebGLRenderer({
+                alpha: true
+            });
+            renderer.setClearColor(new THREE.Color('lightgrey'), 0);
+            renderer.setSize(window.innerWidth, window.innerHeight);
+            document.body.appendChild(renderer.domElement);
+            onRenderFcts = [];
+            scene = new THREE.Scene();
+            var ambient = new THREE.AmbientLight(0x666666);
+            scene.add(ambient);
+            var directionalLight = new THREE.DirectionalLight(0x4e5ba0);
+            directionalLight.position.set(-1, 1, 1).normalize();
+            scene.add(directionalLight);
+            camera = new THREE.Camera();
+            scene.add(camera);
+            arToolkitSource = new THREEx.ArToolkitSource({
+                sourceType: 'webcam',
+            });
+            arToolkitSource.init(function onReady() {
+
+                arToolkitSource.onResize(renderer.domElement)
+            });
+            window.addEventListener('resize', function() {
+                arToolkitSource.onResize(renderer.domElement)
+            });
+            arToolkitContext = new THREEx.ArToolkitContext({
+                cameraParametersUrl: 'data/camera_para.dat',
+                detectionMode: 'mono',
+                maxDetectionRate: 30,
+                canvasWidth: 80 * 3,
+                canvasHeight: 60 * 3,
+            });
+            arToolkitContext.init(function onCompleted() {
+                camera.projectionMatrix.copy(arToolkitContext.getProjectionMatrix());
+            });
+            onRenderFcts.push(function() {
+                if (arToolkitSource.ready === false) return
+                arToolkitContext.update(arToolkitSource.domElement)
+            });
+
+            ///// Add your custom .patt's here at 'patternUrl', make sure the .patt file is in the data folder.
+            markerRoot = new THREE.Group
+            scene.add(markerRoot)
+            artoolkitMarker = new THREEx.ArMarkerControls(arToolkitContext, markerRoot, {
+                type: 'pattern',
+                patternUrl: 'data/pattern.patt'
+            });
+
+
+            ///// Assign sprites/elements to markers here.
+            markerRoot.add(sprite);
+            markerRoot.add(sprite2);
+            markerRoot.add(sprite3);
+            markerRoot.add(sprite4);
+            markerRoot.add(sprite5);
+
+            onRenderFcts.push(function() {});
+            onRenderFcts.push(function() {
+                renderer.render(scene, camera)
+            });
+            lastTimeMsec = null;
+            animate();
+        }
+
+        ///// Animation function:
+        function animate(nowMsec) {
+            requestAnimationFrame(animate);
+            lastTimeMsec = lastTimeMsec || nowMsec - 1000 / 60;
+            var deltaMsec = Math.min(200, nowMsec - lastTimeMsec);
+            lastTimeMsec = nowMsec;
+            pulse = Date.now() * 0.0009;
+            onRenderFcts.forEach(function(onRenderFct) {
+                onRenderFct(deltaMsec / 1000, nowMsec / 1000);
+            });
+        }
+
+        console.log("Version 0.5.0");
 
     </script>
 </body>
-
-</html>

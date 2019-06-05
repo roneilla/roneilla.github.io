@@ -120,45 +120,6 @@
             opacity: 1
         };
         var btext = document.getElementsByTagName("BUTTON")[1].textContent;
-        ///// Video variables:
-        var video, videoImage, videoImageContext, videoTexture;
-        var pc = 0;
-
-        ///// Audio variables, sawp in your audio files here:
-        var audio1 = new Audio('audio/audio1.mp3');
-        var audio2 = new Audio('audio/audio2.mp3');
-        var audio3 = new Audio('audio/audio3.mp3');
-
-        ///// Create a video element.
-        video = document.createElement('video');
-        video.src = "KOLL.mp4";
-        video.load();
-
-
-        videoImage = document.createElement('canvas');
-        ///// When you change the video source, check it's resolution and change these values:
-        videoImage.width = 640;
-        videoImage.height = 360;
-
-        videoImageContext = videoImage.getContext('2d');
-        ///// Background color if no video present.
-        videoImageContext.fillStyle = '#000000';
-        videoImageContext.fillRect(0, 0, videoImage.width, videoImage.height);
-
-        videoTexture = new THREE.Texture(videoImage);
-        videoTexture.minFilter = THREE.LinearFilter;
-        videoTexture.magFilter = THREE.LinearFilter;
-
-        var movieMaterial = new THREE.MeshBasicMaterial({
-            map: videoTexture,
-            overdraw: true,
-            side: THREE.DoubleSide
-        });
-        ///// The geometry on which the movie will be displayed.
-        ///// Movie image will be scaled to fit this size:
-        var movieGeometry = new THREE.PlaneGeometry(4.48, 2.52);
-        var movieScreen = new THREE.Mesh(movieGeometry, movieMaterial);
-        movieScreen.rotation.x = Math.PI / 2;
 
 
         ///// Sprite Maps, map your images here:
@@ -180,7 +141,7 @@
             color: 0xffffff
         });
         sprite2 = new THREE.Sprite(spriteMaterial2);
-        sprite2.position.set(0, 0, -0.2);
+        sprite2.position.set(0, 0, -1);
         sprite2.scale.set(1, 1, 1);
 
         var spriteMap3 = new THREE.TextureLoader().load("img/tree-03.png");
@@ -189,7 +150,7 @@
             color: 0xffffff
         });
         sprite3 = new THREE.Sprite(spriteMaterial3);
-        sprite3.position.set(0, 0, -0.4);
+        sprite3.position.set(0, 0, -2);
         sprite3.scale.set(1, 1, 1);
 
         var spriteMap4 = new THREE.TextureLoader().load("img/tree-04.png");
@@ -198,7 +159,7 @@
             color: 0xffffff
         });
         sprite4 = new THREE.Sprite(spriteMaterial4);
-        sprite4.position.set(0, 0, -0.6);
+        sprite4.position.set(0, 0, -3);
         sprite4.scale.set(1, 1, 1);
 
         var spriteMap5 = new THREE.TextureLoader().load("img/tree-05.png");
@@ -207,7 +168,7 @@
             color: 0xffffff
         });
         sprite5 = new THREE.Sprite(spriteMaterial5);
-        sprite5.position.set(0, 0, -0.8);
+        sprite5.position.set(0, 0, -4);
         sprite5.scale.set(1, 1, 1);
 
         ///// Custom Functions, these scale on the y-axis, add x and z for complete scaling (as an example).
@@ -303,7 +264,7 @@
             });
         }
 
-        console.log("Version 0.4.5");
+        console.log("Version 0.4.6");
 
     </script>
 </body>

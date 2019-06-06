@@ -1,0 +1,43 @@
+<!doctype HTML>
+
+<html>
+
+<head>
+    <title>AR Experiments</title>
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <script src="https://aframe.io/releases/0.8.2/aframe.min.js"></script>
+    <script src="https://cdn.rawgit.com/jeromeetienne/AR.js/1.6.2/aframe/build/aframe-ar.js"></script>
+</head>
+
+<body style='margin : 0px; overflow: hidden;'>
+    <a-scene embedded arjs>
+        <a-assets>
+            <a-asset-item id="house" src="assets/house.dae"></a-asset-item>
+            <img id="tree1" src="img/tree-01.png">
+            <img id="tree2" src="img/tree-02.png">
+            <img id="tree3" src="img/tree-03.png">
+            <img id="tree4" src="img/tree-04.png">
+            <img id="tree5" src="img/tree-05.png">
+            <video id="test" autoplay loop="true" src="videos/test.mp4" playsinline></video>
+        </a-assets>
+        <a-marker-camera type='pattern' url='data/pattern.patt'>
+            <!--            <a-collada-model src="#house" position='0 0.5 0' rotation='-90 0 0' scale='0.5 0.5 0.5'></a-collada-model>-->
+            <!--
+            <a-image src="#tree1" position='0 5 0' rotation='-90 0 0'></a-image>
+            <a-image src="#tree2" position='0 4 0' rotation='-90 0 0'></a-image>
+            <a-image src="#tree3" position='0 3 0' rotation='-90 0 0'></a-image>
+            <a-image src="#tree4" position='0 2 0' rotation='-90 0 0'></a-image>
+            <a-image src="#tree5" position='0 1 0' rotation='-90 0 0'></a-image>
+-->
+
+            <a-video src="#test" width="3" height="1.5" position="0 0 0" rotation="-90 0 0"></a-video>
+        </a-marker-camera>
+        <a-entity camera></a-entity>
+    </a-scene>
+    <script>
+        console.log("A FRAME TEST Version 1.2.3");
+
+    </script>
+</body>
+
+</html>

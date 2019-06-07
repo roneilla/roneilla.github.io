@@ -149,7 +149,7 @@
                 defaultMaterial
             );
             // portal.position.y = portalHeight / 2 + portalBorder;
-            portal.rotation.y = -Math.PI;
+            portal.rotation.x = -Math.PI / 2;
             portal.layers.set(1);
             smoothedRoot.add(portal);
 
@@ -168,7 +168,7 @@
                 portalMaterial
             );
             portalBorderMesh.position.y = portal.position.y;
-            portalBorderMesh.rotation.y = portal.rotation.y;
+            portalBorderMesh.rotation.x = portal.rotation.x;
             portalBorderMesh.layers.set(0);
             smoothedRoot.add(portalBorderMesh);
 
@@ -288,7 +288,7 @@
             render();
         }
 
-        console.log("Portal 0.1.3")
+        console.log("Portal 0.1.4")
 
     </script>
 

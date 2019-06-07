@@ -2,13 +2,17 @@
 
 <head>
     <meta name="viewport" content="width=device-width, user-scalable=no, minimum-scale=1.0, maximum-scale=1.0">
-    <title>Hello, AR Cube!</title>
+    <title>AR Experiments</title>
     <!-- include three.js library -->
     <script src='js/three.js'></script>
+    <script src='js/OBJLoader.js'></script>
+    <script src='js/MTLLoader.js'></script>
     <script src='js/ColladaLoader.js'></script>
-
+    <script src='js/tween.min.js'></script>
     <!-- include jsartookit -->
-    <script src="jsartoolkit5/artoolkit.min.js"></script>
+    <script src="jsartoolkit5/artoolkit.min.js">
+
+    </script>
     <script src="jsartoolkit5/artoolkit.api.js"></script>
     <!-- include threex.artoolkit -->
     <script src="threex/threex-artoolkitsource.js"></script>
@@ -29,8 +33,13 @@
 
         var arToolkitSource, arToolkitContext;
 
-        var patternArray, markerRootArray, markerGroupArray;
-        var sceneGroup;
+        var markerRoot1;
+
+        var mesh1;
+
+        // var redCube, yellowCube, blueCube;
+
+        var dae;
 
         initialize();
         animate();
@@ -38,7 +47,7 @@
         function initialize() {
             scene = new THREE.Scene();
 
-            let ambientLight = new THREE.AmbientLight(0xcccccc, 0.5);
+            let ambientLight = new THREE.AmbientLight(0xcccccc, 1.0);
             scene.add(ambientLight);
 
             camera = new THREE.Camera();
@@ -103,54 +112,47 @@
             // setup markerRoots
             ////////////////////////////////////////////////////////////
 
-            markerRootArray = [];
-            markerGroupArray = [];
-            patternArray = ["letterA", "letterB", "letterC", "letterD", "letterF", "kanji"];
+            // build markerControls
+            markerRoot1 = new THREE.Group();
+            scene.add(markerRoot1);
+            let markerControls1 = new THREEx.ArMarkerControls(arToolkitContext, markerRoot1, {
+                type: 'pattern',
+                patternUrl: "data/hiro.patt",
+            })
 
-            let rotationArray = [new THREE.Vector3(-Math.PI / 2, 0, 0), new THREE.Vector3(0, -Math.PI / 2, Math.PI / 2), new THREE.Vector3(Math.PI / 2, 0, Math.PI),
-                new THREE.Vector3(-Math.PI / 2, Math.PI / 2, 0), new THREE.Vector3(Math.PI, 0, 0), new THREE.Vector3(0, 0, 0)
-            ];
-
-            for (let i = 0; i < 6; i++) {
-                let markerRoot = new THREE.Group();
-                markerRootArray.push(markerRoot);
-                scene.add(markerRoot);
-                let markerControls = new THREEx.ArMarkerControls(arToolkitContext, markerRoot, {
-                    type: 'pattern',
-                    patternUrl: "data/" + patternArray[i] + ".patt",
-                });
-
-                let markerGroup = new THREE.Group();
-                markerGroupArray.push(markerGroup);
-                markerGroup.position.y = -1.25 / 2;
-                markerGroup.rotation.setFromVector3(rotationArray[i]);
-
-                markerRoot.add(markerGroup);
-            }
-
-            ////////////////////////////////////////////////////////////
-            // setup scene
-            ////////////////////////////////////////////////////////////
-
-            sceneGroup = new THREE.Group();
-            // a 1x1x1 cube model with scale factor 1.25 fills up the physical cube
-            sceneGroup.scale.set(1.25 / 2, 1.25 / 2, 1.25 / 2);
+            let geometry1 = new THREE.PlaneBufferGeometry(1, 1, 4, 4);
+            let loader = new THREE.TextureLoader();
+            // let texture = loader.load( 'images/earth.jpg', render );
+            let material1 = new THREE.MeshBasicMaterial({
+                color: 0x0000ff,
+                opacity: 0.5
+            });
+            mesh1 = new THREE.Mesh(geometry1, material1);
+            mesh1.rotation.x = -Math.PI / 2;
+            markerRoot1.add(mesh1);
 
             var loader2 = new THREE.ColladaLoader();
             loader2.options.convertUpAxis = true;
-            loader2.load('models/biome4.dae', function(collada) {
+            loader2.load('models/biome2.dae', function(collada) {
                 dae = collada.scene;
-                dae.scale.x = dae.scale.y = dae.scale.z = 0.75;
+                dae.scale.x = dae.scale.y = dae.scale.z = 0.3;
                 dae.rotation.x = -Math.PI / 2;
                 dae.position.y = 2;
                 dae.updateMatrix();
-                sceneGroup.add(dae);
+
+                rotateScene();
+
+                markerRoot1.add(dae);
                 render();
             });
+        }
 
-            let pointLight = new THREE.PointLight(0xffffff, 1, 50);
-            pointLight.position.set(0.5, 3, 2);
-            scene.add(pointLight);
+        function onProgress(xhr) {
+            console.log((xhr.loaded / xhr.total * 100) + '% loaded');
+        }
+
+        function onError(xhr) {
+            console.log('An error happened');
         }
 
 
@@ -158,33 +160,34 @@
             // update artoolkit on every frame
             if (arToolkitSource.ready !== false)
                 arToolkitContext.update(arToolkitSource.domElement);
-
-            for (let i = 0; i < 6; i++) {
-                if (markerRootArray[i].visible) {
-                    markerGroupArray[i].add(sceneGroup);
-                    console.log("visible: " + patternArray[i]);
-                    break;
-                }
-            }
-
         }
-
 
         function render() {
             renderer.render(scene, camera);
         }
 
-
         function animate() {
             requestAnimationFrame(animate);
+            TWEEN.update();
+
             deltaTime = clock.getDelta();
             totalTime += deltaTime;
             update();
             render();
         }
 
-        console.log("Version 0.1.0")
+        function rotateScene() {
+new TWEEN.Tween(dae.rotation).to({
+x: 0,
+y: 10000,
+z: 0
+}, 15000).easing(TWEEN.Easing.Quadratic.Out).start();
+        }
+
+        console.log("Collada 0.1.7");
 
     </script>
 
 </body>
+
+</html>

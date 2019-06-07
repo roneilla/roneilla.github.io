@@ -153,74 +153,62 @@
             let tileTexture = loader.load("images/tiles.jpg");
 
             // reversed cube
-            sceneGroup.add(
-                new THREE.Mesh(
-                    new THREE.BoxGeometry(2, 2, 2),
-                    new THREE.MeshBasicMaterial({
-                        map: tileTexture,
-                        side: THREE.BackSide,
-                    })
-                )
-            );
+            //           sceneGroup.add(
+            // new THREE.Mesh(
+            // new THREE.BoxGeometry(2, 2, 2),
+            // new THREE.MeshBasicMaterial({
+            // map: tileTexture,
+            // side: THREE.BackSide,
+            // })
+            // )
+            // );
 
             // cube vertices
 
-            let sphereGeometry = new THREE.SphereGeometry(0.20, 6, 6);
-
-            let sphereCenters = [
-                new THREE.Vector3(-1, -1, -1), new THREE.Vector3(-1, -1, 1), new THREE.Vector3(-1, 1, -1), new THREE.Vector3(-1, 1, 1),
-                new THREE.Vector3(1, -1, -1), new THREE.Vector3(1, -1, 1), new THREE.Vector3(1, 1, -1), new THREE.Vector3(1, 1, 1),
-            ];
-
-            let sphereColors = [0x444444, 0x0000ff, 0x00ff00, 0x00ffff, 0xff0000, 0xff00ff, 0xffff00, 0xffffff];
-
-            for (let i = 0; i < 8; i++) {
-                let sphereMesh = new THREE.Mesh(
-                    sphereGeometry,
-                    new THREE.MeshLambertMaterial({
-                        map: tileTexture,
-                        color: sphereColors[i]
-                    })
-                );
-                sphereMesh.position.copy(sphereCenters[i]);
-                sceneGroup.add(sphereMesh);
-            }
+            //            let sphereGeometry = new THREE.SphereGeometry(0.20, 6, 6);
+            //
+            //            let sphereCenters = [
+            //                new THREE.Vector3(-1, -1, -1), new THREE.Vector3(-1, -1, 1), new THREE.Vector3(-1, 1, -1), new THREE.Vector3(-1, 1, 1),
+            //                new THREE.Vector3(1, -1, -1), new THREE.Vector3(1, -1, 1), new THREE.Vector3(1, 1, -1), new THREE.Vector3(1, 1, 1),
+            //            ];
+            //
+            //            let sphereColors = [0x444444, 0x0000ff, 0x00ff00, 0x00ffff, 0xff0000, 0xff00ff, 0xffff00, 0xffffff];
+            //
+            //            for (let i = 0; i < 8; i++) {
+            //                let sphereMesh = new THREE.Mesh(
+            //                    sphereGeometry,
+            //                    new THREE.MeshLambertMaterial({
+            //                        map: tileTexture,
+            //                        color: sphereColors[i]
+            //                    })
+            //                );
+            //                sphereMesh.position.copy(sphereCenters[i]);
+            //                sceneGroup.add(sphereMesh);
+            //            }
 
             // cube edges
 
-            let edgeGeometry = new THREE.CylinderGeometry(0.05, 0.05, 2, 32);
-
-            let edgeCenters = [
-                new THREE.Vector3(0, -1, -1), new THREE.Vector3(0, 1, -1), new THREE.Vector3(0, -1, 1), new THREE.Vector3(0, 1, 1),
-                new THREE.Vector3(-1, 0, -1), new THREE.Vector3(1, 0, -1), new THREE.Vector3(-1, 0, 1), new THREE.Vector3(1, 0, 1),
-                new THREE.Vector3(-1, -1, 0), new THREE.Vector3(1, -1, 0), new THREE.Vector3(-1, 1, 0), new THREE.Vector3(1, 1, 0)
-            ];
-
-            let edgeRotations = [
-                new THREE.Vector3(0, 0, Math.PI / 2), new THREE.Vector3(0, 0, Math.PI / 2), new THREE.Vector3(0, 0, Math.PI / 2), new THREE.Vector3(0, 0, Math.PI / 2),
-                new THREE.Vector3(0, 0, 0), new THREE.Vector3(0, 0, 0), new THREE.Vector3(0, 0, 0), new THREE.Vector3(0, 0, 0),
-                new THREE.Vector3(Math.PI / 2, 0, 0), new THREE.Vector3(Math.PI / 2, 0, 0), new THREE.Vector3(Math.PI / 2, 0, 0), new THREE.Vector3(Math.PI / 2, 0, 0)
-            ];
-
-            let edgeColors = [
-                0x880000, 0x880000, 0x880000, 0x880000,
-                0x008800, 0x008800, 0x008800, 0x008800,
-                0x000088, 0x000088, 0x000088, 0x000088
-            ];
-
-            for (let i = 0; i < 12; i++) {
-                let edge = new THREE.Mesh(
-                    edgeGeometry,
-                    new THREE.MeshLambertMaterial({
-                        map: tileTexture,
-                        color: edgeColors[i]
-                    })
-                );
-                edge.position.copy(edgeCenters[i]);
-                edge.rotation.setFromVector3(edgeRotations[i]);
-
-                sceneGroup.add(edge);
-            }
+            //           let edgeGeometry = new THREE.CylinderGeometry(0.05, 0.05, 2, 32);
+            //
+            // let edgeCenters = [
+            // new THREE.Vector3(0, -1, -1), new THREE.Vector3(0, 1, -1), new THREE.Vector3(0, -1, 1), new THREE.Vector3(0, 1, 1),
+            // new THREE.Vector3(-1, 0, -1), new THREE.Vector3(1, 0, -1), new THREE.Vector3(-1, 0, 1), new THREE.Vector3(1, 0, 1),
+            // new THREE.Vector3(-1, -1, 0), new THREE.Vector3(1, -1, 0), new THREE.Vector3(-1, 1, 0), new THREE.Vector3(1, 1, 0)
+            // ];
+            //
+            // let edgeRotations = [
+            // new THREE.Vector3(0, 0, Math.PI / 2), new THREE.Vector3(0, 0, Math.PI / 2), new THREE.Vector3(0, 0, Math.PI / 2), new THREE.Vector3(0, 0, Math.PI / 2),
+            // new THREE.Vector3(0, 0, 0), new THREE.Vector3(0, 0, 0), new THREE.Vector3(0, 0, 0), new THREE.Vector3(0, 0, 0),
+            // new THREE.Vector3(Math.PI / 2, 0, 0), new THREE.Vector3(Math.PI / 2, 0, 0), new THREE.Vector3(Math.PI / 2, 0, 0), new THREE.Vector3(Math.PI / 2, 0, 0)
+            // ];
+            //
+            // let edgeColors = [
+            // 0x880000, 0x880000, 0x880000, 0x880000,
+            // 0x008800, 0x008800, 0x008800, 0x008800,
+            // 0x000088, 0x000088, 0x000088, 0x000088
+            // ];
+            //
+            // for (let i = 0; i < 12; i++) { // let edge=new THREE.Mesh( // edgeGeometry, // new THREE.MeshLambertMaterial({ // map: tileTexture, // color: edgeColors[i] // }) // ); // edge.position.copy(edgeCenters[i]); // edge.rotation.setFromVector3(edgeRotations[i]); // // sceneGroup.add(edge); // }
 
             sceneGroup.add(
                 new THREE.Mesh(
@@ -264,8 +252,8 @@
             render();
         }
 
+        console.log("Version 0.1.2")
+
     </script>
 
 </body>
-
-</html>

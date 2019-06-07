@@ -1,4 +1,4 @@
-### Currently working on experiments with augumented reality using:
+### Currently working on experiments with augmented reality using:
 ARjs
 <br>
 ColladaLoader

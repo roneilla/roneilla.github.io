@@ -150,7 +150,7 @@
             sceneGroup.add( mesh );
             */
 
-            let tileTexture = loader.load("images/tiles.jpg");
+            //            let tileTexture = loader.load("images/tiles.jpg");
 
             // reversed cube
             //           sceneGroup.add(
@@ -212,7 +212,7 @@
 
             sceneGroup.add(
                 new THREE.Mesh(
-                    new THREE.SphereGeometry(8, 5, 2),
+                    new THREE.TorusBufferGeometry(10, 3, 16, 3),
                     new THREE.MeshNormalMaterial()
                 )
             );
@@ -252,7 +252,7 @@
             render();
         }
 
-        console.log("Version 0.1.8")
+        console.log("Version 0.1.9")
 
     </script>
 

@@ -8,8 +8,11 @@
     <script src='js/OBJLoader.js'></script>
     <script src='js/MTLLoader.js'></script>
     <script src='js/ColladaLoader.js'></script>
+    <script src='js/tween.min.js'></script>
     <!-- include jsartookit -->
-    <script src="jsartoolkit5/artoolkit.min.js"></script>
+    <script src="jsartoolkit5/artoolkit.min.js">
+
+    </script>
     <script src="jsartoolkit5/artoolkit.api.js"></script>
     <!-- include threex.artoolkit -->
     <script src="threex/threex-artoolkitsource.js"></script>
@@ -33,6 +36,8 @@
         var markerRoot1;
 
         var mesh1;
+
+        var redCube, yellowCube, blueCube;
 
         initialize();
         animate();
@@ -124,6 +129,23 @@
             mesh1.rotation.x = -Math.PI / 2;
             markerRoot1.add(mesh1);
 
+            var loader2 = new THREE.ColladaLoader();
+            loader2.options.convertUpAxis = true;
+            loader2.load('models/test.dae', function(collada) {
+                var dae = collada.scene;
+                dae.scale.x = dae.scale.y = dae.scale.z = 0.01;
+                dae.updateMatrix();
+
+                redCube = dae.getObjectByName("Cube");
+                yellowCube = dae.getObjectByName("Cube.2");
+                blueCube = dae.getObjectByName("Cube.1");
+                startMoving();
+
+                markerRoot1.add(dae);
+                render();
+            });
+
+
         }
 
         function onProgress(xhr) {
@@ -134,43 +156,12 @@
             console.log('An error happened');
         }
 
-        new THREE.MTLLoader()
-            .setPath('models/')
-            .load('biome2.mtl', function(materials) {
-                materials.preload();
-                new THREE.OBJLoader()
-                    .setMaterials(materials)
-                    .setPath('models/')
-                    .load('biome2.obj', function(group) {
-                        mesh0 = group.children[0];
-                        mesh0.position.y = 0;
-                        mesh0.position.x = 3;
-                        mesh0.position.z = 3;
-                        //
-                        //                        if (mesh0.position.y === 10) {
-                        //                            mesh0.position.y -= 1;
-                        //                        } else {
-                        //                            mesh0.position.y += 1;
-                        //                        }
-
-                        var sX, sY, sZ = 1;
-
-                        sX++;
-                        sY++;
-                        sZ++;
-                        mesh0.scale.set(sX, sY, sZ);
-
-                        markerRoot1.add(mesh0);
-                    }, onProgress, onError);
-            });
-
 
         function update() {
             // update artoolkit on every frame
             if (arToolkitSource.ready !== false)
                 arToolkitContext.update(arToolkitSource.domElement);
         }
-
 
         function render() {
             renderer.render(scene, camera);
@@ -179,11 +170,32 @@
 
         function animate() {
             requestAnimationFrame(animate);
+            TWEEN.update();
+
             deltaTime = clock.getDelta();
             totalTime += deltaTime;
             update();
             render();
         }
+
+        function startMoving() {
+            new TWEEN.Tween(redCube.rotation).to({
+                x: 0,
+                y: 500,
+                z: 0
+            }, 5000).easing(TWEEN.Easing.Quadratic.Out).start();
+            new TWEEN.Tween(yellowCube.position).to({
+                x: -1000,
+                y: 0,
+                z: 0
+            }, 50000).easing(TWEEN.Easing.Quadratic.Out).start();
+            new TWEEN.Tween(blueCube.scale).to({
+                x: 5,
+                y: 5,
+                z: 5
+            }, 50000).easing(TWEEN.Easing.Quadratic.Out).start();
+        }
+
 
         console.log("3D Object 0.1.17");
 

@@ -143,16 +143,23 @@
                     .setPath('models/')
                     .load('biome2.obj', function(group) {
                         mesh0 = group.children[0];
-                        mesh0.position.y += 1;
+                        mesh0.position.y = 0;
                         mesh0.position.x = 3;
                         mesh0.position.z = 3;
+                        //
+                        //                        if (mesh0.position.y === 10) {
+                        //                            mesh0.position.y -= 1;
+                        //                        } else {
+                        //                            mesh0.position.y += 1;
+                        //                        }
 
-                        if (mesh0.position.y === 5) {
-                            mesh0.position.y -= 1;
-                        } else {
-                            mesh0.position.y += 1;
-                        }
-                        mesh0.scale.set(1, 1, 1);
+                        var sX, sY, sZ = 1;
+
+                        sX++;
+                        sY++;
+                        sZ++;
+                        mesh0.scale.set(sX, sY, sZ);
+
                         markerRoot1.add(mesh0);
                     }, onProgress, onError);
             });
@@ -178,7 +185,7 @@
             render();
         }
 
-        console.log("3D Object 0.1.16");
+        console.log("3D Object 0.1.17");
 
     </script>
 

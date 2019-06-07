@@ -37,7 +37,9 @@
 
         var mesh1;
 
-        var redCube, yellowCube, blueCube;
+        // var redCube, yellowCube, blueCube;
+
+        var dae;
 
         initialize();
         animate();
@@ -132,7 +134,7 @@
             var loader2 = new THREE.ColladaLoader();
             loader2.options.convertUpAxis = true;
             loader2.load('models/biome2.dae', function(collada) {
-                var dae = collada.scene;
+                dae = collada.scene;
                 dae.scale.x = dae.scale.y = dae.scale.z = 0.3;
                 dae.rotation.x = -Math.PI / 2;
                 dae.position.y = 2;
@@ -174,7 +176,11 @@
             render();
         }
 
-        console.log("Collada 0.1.1");
+        function rotateScene() {
+            dae.rotation.x += 10;
+        }
+
+        console.log("Collada 0.1.2");
 
     </script>
 

@@ -133,9 +133,9 @@
             loader2.options.convertUpAxis = true;
             loader2.load('models/biome2.dae', function(collada) {
                 var dae = collada.scene;
-                dae.scale.x = dae.scale.y = dae.scale.z = 0.5;
+                dae.scale.x = dae.scale.y = dae.scale.z = 0.3;
                 dae.rotation.x = -Math.PI / 2;
-                dae.position.y = 4;
+                dae.position.y = 2;
                 dae.updateMatrix();
 
 
@@ -176,7 +176,7 @@
             render();
         }
 
-        console.log("Collada 0.1.0");
+        console.log("Collada 0.1.1");
 
     </script>
 

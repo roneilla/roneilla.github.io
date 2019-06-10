@@ -1,199 +1,346 @@
 <!DOCTYPE html>
+<meta name="viewport" content="width=device-width, user-scalable=no, minimum-scale=1.0, maximum-scale=1.0">
+<!-- include three.js library -->
+<script src='js/three.js'></script>
+<script src='js/OBJLoader.js'></script>
+<script src='js/MTLLoader.js'></script>
+<script src='js/ColladaLoader.js'></script>
+<script src='js/tween.min.js'></script>
+<!-- include jsartookit -->
+<script src="jsartoolkit5/artoolkit.min.js">
+</script>
+<script src="jsartoolkit5/artoolkit.api.js"></script>
+<!-- include threex.artoolkit -->
+<script src="threex/threex-artoolkitsource.js"></script>
+<script src="threex/threex-artoolkitcontext.js"></script>
+<script src="threex/threex-arbasecontrols.js"></script>
+<script src="threex/threex-armarkercontrols.js"></script>
 
-<head>
-    <meta name="viewport" content="width=device-width, user-scalable=no, minimum-scale=1.0, maximum-scale=1.0">
-    <title>AR Experiments</title>
-    <!-- include three.js library -->
-    <script src='js/three.js'></script>
-    <script src='js/OBJLoader.js'></script>
-    <script src='js/MTLLoader.js'></script>
-    <script src='js/ColladaLoader.js'></script>
-    <script src='js/tween.min.js'></script>
-    <!-- include jsartookit -->
-    <script src="jsartoolkit5/artoolkit.min.js">
+<script>
+    THREEx.ArToolkitContext.baseURL = '/'
 
-    </script>
-    <script src="jsartoolkit5/artoolkit.api.js"></script>
-    <!-- include threex.artoolkit -->
-    <script src="threex/threex-artoolkitsource.js"></script>
-    <script src="threex/threex-artoolkitcontext.js"></script>
-    <script src="threex/threex-arbasecontrols.js"></script>
-    <script src="threex/threex-armarkercontrols.js"></script>
-</head>
+</script>
 
-<body style='margin : 0px; overflow: hidden; font-family: Monospace;'>
+<style>
+    body {
+        background: #e2e2e2;
+        margin: 0px;
+        overflow: hidden;
+        font-family: Helvetica, Arial, Sans-Serif;
+    }
 
-    <!-- 
-  Example created by Lee Stemkoski: https://github.com/stemkoski
-  Based on the AR.js library and examples created by Jerome Etienne: https://github.com/jeromeetienne/AR.js/
--->
+    canvas {
+        position: absolute;
+        top: 0;
+        left: 0;
+    }
+
+    #button {
+        padding: 0;
+        margin: 0;
+        width: 100vw;
+        height: 12vh;
+        float: left;
+        position: relative;
+        text-align: center;
+    }
+
+    #button button {
+        margin-top: 90vh;
+        width: 20%;
+        height: 50%;
+        font-size: 100%;
+        color: white;
+        text-align: center;
+        z-index: 100;
+    }
+
+    #button:hover {
+        cursor: pointer;
+    }
+
+    #leftbutton:active {
+        background-color: green;
+        box-shadow: 0 5px #666;
+        transform: translateY(2px);
+    }
+
+    #rightbutton:active {
+        background-color: red;
+        box-shadow: 0 5px #666;
+        transform: translateY(2px);
+    }
+
+    #leftbutton {
+        width: 100%;
+        float: left;
+        background-color: rgba(150, 150, 150, 0.8);
+        position: relative;
+        margin-left: 15%;
+        border-radius: 5px;
+        line-height: 100%;
+    }
+
+    #rightbutton {
+        width: 100%;
+        float: right;
+        background-color: rgba(150, 150, 150, 0.8);
+        position: relative;
+        margin-right: 15%;
+        border-radius: 5px;
+    }
+
+    #middlebutton {
+        width: 100%;
+        background-color: rgba(150, 150, 150, 0.8);
+        border-radius: 5px;
+        position: inherit;
+    }
+
+</style>
+
+<body>
+    <div id="button">
+        <button id="leftbutton" onclick="Grow()">GROW</button>
+        <button id="middlebutton" onclick="playVideo()">PLAY</button>
+        <button id="rightbutton" onclick="Shrink()">SHRINK</button>
+    </div>
 
     <script>
-        var scene, camera, renderer, clock, deltaTime, totalTime;
+        //BASIC EXAMPLES OF MARKER-BASED AUGMENTED REALITY:
+        //IMAGE, SCALE, POSITION, ROTATION, OPACITY, SOUND, VIDEO, INTERACTIVITY. 
+        //By Lucas Di Monte 2018, contact me on facebook messenger for help.
+        //All the basics are here, use JavaScript and CSS to play around and see what you can come up with.
+        //Please note that you will need a button in order to initialize sound on a mobile device.
+        //This will primarily be designed for a smart phone/tablet, keep that in mind when styling CSS.
+        //Use the mobile emulation mode in Chrome for proper framing.
 
-        var arToolkitSource, arToolkitContext;
+        ///// Init variables:
+        var renderer, scene, camera;
+        var arToolkitContext, onRenderFcts, arToolkitSource, markerRoot, markerRoot2, markerRoot3, artoolkitMarker, lastTimeMsec;
+        var sprite, sprite2, sprite3, sprite4, sprite5;
+        var params = {
+            opacity: 1
+        };
+        var btext = document.getElementsByTagName("BUTTON")[1].textContent;
 
-        var markerRoot1;
+        ///// Video variables:
+        var video, videoImage, videoImageContext, videoTexture;
+        var pc = 0;
 
-        var mesh1;
+        ///// Create a video element.
+        video = document.createElement('video');
+        video.src = "videos/CORAL.mp4";
+        video.load();
 
-        // var redCube, yellowCube, blueCube;
 
-        var dae;
+        videoImage = document.createElement('canvas');
+        ///// When you change the video source, check it's resolution and change these values:
+        videoImage.width = 360;
+        videoImage.height = 360;
 
-        initialize();
-        animate();
+        videoImageContext = videoImage.getContext('2d');
+        ///// Background color if no video present.
+        videoImageContext.fillStyle = '#000000';
+        videoImageContext.fillRect(0, 0, videoImage.width, videoImage.height);
 
-        function initialize() {
-            scene = new THREE.Scene();
+        videoTexture = new THREE.Texture(videoImage);
+        videoTexture.minFilter = THREE.LinearFilter;
+        videoTexture.magFilter = THREE.LinearFilter;
 
-            let ambientLight = new THREE.AmbientLight(0xcccccc, 1.0);
-            scene.add(ambientLight);
+        var movieMaterial = new THREE.MeshBasicMaterial({
+            map: videoTexture,
+            overdraw: true,
+            side: THREE.DoubleSide
+        });
+        ///// The geometry on which the movie will be displayed.
+        ///// Movie image will be scaled to fit this size:
+        var movieGeometry = new THREE.PlaneGeometry(2.52, 2.52);
+        var movieScreen = new THREE.Mesh(movieGeometry, movieMaterial);
+        movieScreen.rotation.x = Math.PI / 2;
 
-            camera = new THREE.Camera();
-            scene.add(camera);
+        movieScreen.position.set(0, 0, 0);
 
+        ///// Custom Functions, these scale on the y-axis, add x and z for complete scaling (as an example).
+        function Grow() {
+            sprite.scale.y += 0.5;
+            sprite2.scale.y += 0.5;
+            movieScreen.scale.y += 0.5;
+            sprite3.scale.y += 0.5;
+        }
+
+        function Shrink() {
+            sprite.scale.y -= 0.5;
+            sprite2.scale.y -= 0.5;
+            movieScreen.scale.y -= 0.5;
+            sprite3.scale.y -= 0.5;
+        }
+
+        ///// Function to play the video when the corresponding marker is in view.
+        function playVideo() {
+            if ((markerRoot2.visible === true)) {
+                video.play();
+                ///// I'm using a variable to keep track of how many times 'PLAY' is clicked, in order to change the button text to 'PAUSE' if it's playing.
+                pc++;
+            }
+            ///// audio*.play is below to trigger audio on mobile, 
+            ///// autoplay is not possible on mobile. What this means 
+            ///// is sound will not play on mobile decies, unless 
+            ///// you click the 'PLAY' button first. From then on, 
+            ///// sound is triggered when the marker is in view.
+            ///// This is a security feature of mobile devices.
+            audio1.play();
+            audio3.play();
+            audio1.pause();
+            audio3.pause();
+        }
+
+        ///// Run Init Function.
+        init();
+
+        ///// Init Renderer, you won't need to touch this, move along.
+        function init() {
             renderer = new THREE.WebGLRenderer({
-                antialias: true,
                 alpha: true
             });
-            renderer.setClearColor(new THREE.Color('lightgrey'), 0)
-            renderer.setSize(640, 480);
-            renderer.domElement.style.position = 'absolute'
-            renderer.domElement.style.top = '0px'
-            renderer.domElement.style.left = '0px'
+            renderer.setClearColor(new THREE.Color('lightgrey'), 0);
+            renderer.setSize(window.innerWidth, window.innerHeight);
             document.body.appendChild(renderer.domElement);
-
-            clock = new THREE.Clock();
-            deltaTime = 0;
-            totalTime = 0;
-
-            ////////////////////////////////////////////////////////////
-            // setup arToolkitSource
-            ////////////////////////////////////////////////////////////
-
+            onRenderFcts = [];
+            scene = new THREE.Scene();
+            var ambient = new THREE.AmbientLight(0x666666);
+            scene.add(ambient);
+            var directionalLight = new THREE.DirectionalLight(0x4e5ba0);
+            directionalLight.position.set(-1, 1, 1).normalize();
+            scene.add(directionalLight);
+            camera = new THREE.Camera();
+            scene.add(camera);
             arToolkitSource = new THREEx.ArToolkitSource({
                 sourceType: 'webcam',
             });
-
-            function onResize() {
-                arToolkitSource.onResize()
-                arToolkitSource.copySizeTo(renderer.domElement)
-                if (arToolkitContext.arController !== null) {
-                    arToolkitSource.copySizeTo(arToolkitContext.arController.canvas)
-                }
-            }
-
             arToolkitSource.init(function onReady() {
-                onResize()
-            });
 
-            // handle resize event
+                arToolkitSource.onResize(renderer.domElement)
+            });
             window.addEventListener('resize', function() {
-                onResize()
+                arToolkitSource.onResize(renderer.domElement)
             });
-
-            ////////////////////////////////////////////////////////////
-            // setup arToolkitContext
-            ////////////////////////////////////////////////////////////	
-
-            // create atToolkitContext
             arToolkitContext = new THREEx.ArToolkitContext({
                 cameraParametersUrl: 'data/camera_para.dat',
-                detectionMode: 'mono'
+                detectionMode: 'mono',
+                maxDetectionRate: 30,
+                canvasWidth: 80 * 3,
+                canvasHeight: 60 * 3,
             });
-
-            // copy projection matrix to camera when initialization complete
             arToolkitContext.init(function onCompleted() {
                 camera.projectionMatrix.copy(arToolkitContext.getProjectionMatrix());
             });
+            onRenderFcts.push(function() {
+                if (arToolkitSource.ready === false) return
+                arToolkitContext.update(arToolkitSource.domElement)
+            });
 
-            ////////////////////////////////////////////////////////////
-            // setup markerRoots
-            ////////////////////////////////////////////////////////////
+            ///// Add your custom .patt's here at 'patternUrl', make sure the .patt file is in the data folder.
+            //            markerRoot = new THREE.Group
+            //            scene.add(markerRoot)
+            //            artoolkitMarker = new THREEx.ArMarkerControls(arToolkitContext, markerRoot, {
+            //                type: 'pattern',
+            //                patternUrl: 'data/sarah/pattern-coral.patt'
+            //            });
 
-            // build markerControls
-            markerRoot1 = new THREE.Group();
-            scene.add(markerRoot1);
-            let markerControls1 = new THREEx.ArMarkerControls(arToolkitContext, markerRoot1, {
+            markerRoot2 = new THREE.Group
+            scene.add(markerRoot2)
+            artoolkitMarker = new THREEx.ArMarkerControls(arToolkitContext, markerRoot2, {
                 type: 'pattern',
-                patternUrl: "data/hiro.patt",
-            })
-
-            let geometry1 = new THREE.PlaneBufferGeometry(1, 1, 4, 4);
-            let loader = new THREE.TextureLoader();
-            // let texture = loader.load( 'images/earth.jpg', render );
-            let material1 = new THREE.MeshBasicMaterial({
-                color: 0x0000ff,
-                opacity: 0.5
-            });
-            mesh1 = new THREE.Mesh(geometry1, material1);
-            mesh1.rotation.x = -Math.PI / 2;
-            markerRoot1.add(mesh1);
-
-
-
-            var loader2 = new THREE.ColladaLoader();
-            loader2.options.convertUpAxis = true;
-            loader2.load('models/biome4.dae', function(collada) {
-                dae = collada.scene;
-                dae.scale.x = dae.scale.y = dae.scale.z = 0.5;
-                dae.rotation.x = -Math.PI / 2;
-
-                dae.position.y = 2;
-                dae.updateMatrix();
-                markerRoot1.add(dae);
-                // rotateScene();
-                render();
+                patternUrl: 'data/pattern-coral.patt'
             });
 
+            //        markerRoot3 = new THREE.Group
+            // scene.add(markerRoot3)
+            // artoolkitMarker = new THREEx.ArMarkerControls(arToolkitContext, markerRoot3, {
+            // type: 'pattern',
+            // patternUrl: 'data/patt.hiro'
+            //
+            // });
+
+            ///// Assign sprites/elements to markers here.
+            //   markerRoot.add(sprite);
+            markerRoot2.add(movieScreen);
+            //  markerRoot3.add(sprite3);
+
+            onRenderFcts.push(function() {});
+            onRenderFcts.push(function() {
+                renderer.render(scene, camera)
+            });
+            lastTimeMsec = null;
+            animate();
         }
 
-        function onProgress(xhr) {
-            console.log((xhr.loaded / xhr.total * 100) + '% loaded');
-        }
-
-        function onError(xhr) {
-            console.log('An error happened');
-        }
-
-
-        function update() {
-            // update artoolkit on every frame
-            if (arToolkitSource.ready !== false)
-                arToolkitContext.update(arToolkitSource.domElement);
-        }
-
-        function render() {
-            TWEEN.update();
-            renderer.render(scene, camera);
-
-        }
-
-        function animate() {
+        ///// Animation function:
+        function animate(nowMsec) {
             requestAnimationFrame(animate);
+            lastTimeMsec = lastTimeMsec || nowMsec - 1000 / 60;
+            var deltaMsec = Math.min(200, nowMsec - lastTimeMsec);
+            lastTimeMsec = nowMsec;
+            pulse = Date.now() * 0.0009;
+            onRenderFcts.forEach(function(onRenderFct) {
+                onRenderFct(deltaMsec / 1000, nowMsec / 1000);
+            });
 
+            ///// Audio player logic, for mobile you require an interaction (button click) in order for sound to initialize.
+            //            if (markerRoot.visible === true) {
+            //                audio1.play();
+            //            }
+            //            if (markerRoot.visible === false) {
+            //                audio1.pause();
+            //            }
 
-            deltaTime = clock.getDelta();
-            totalTime += deltaTime;
+            if (markerRoot2.visible === false) {
+                video.pause();
+                pc = 0;
+            }
+            //           if (markerRoot3.visible === true) {
+            // audio3.play();
+            // }
+            // if (markerRoot3.visible === false) {
+            // audio3.pause();
+            // }
 
-            update();
+            ///// Sprite3 "animation" (as an example).
+            //            spriteMaterial3.rotation += 0.005;
+            // spriteMaterial3.opacity -= 0.002;
+            //
+            // if (spriteMaterial3.opacity <= 0) { // spriteMaterial3.opacity=1; // }
+            ///// Play the video texture if it's loaded.
+            if (video.readyState === video.HAVE_ENOUGH_DATA) {
+                videoImageContext.drawImage(video, 0, 0);
+                if (videoTexture)
+                    videoTexture.needsUpdate = true;
+            }
 
-            render();
+            ///// Check if 'PLAY' is clicked, play the video, change 'PLAY' button text depending on video state.
+            if (pc >= 2) {
+                video.pause();
+                pc = 0;
+            }
+
+            if (pc == 1) {
+                btext = "PAUSE";
+                var b = document.getElementById('middlebutton');
+                b.setAttribute('content', 'PAUSE');
+                b.setAttribute('class', 'btn');
+                b.innerHTML = 'PAUSE';
+
+            }
+            if (pc != 1) {
+                btext = "PLAY";
+                var b = document.getElementById('middlebutton');
+                b.setAttribute('content', 'PLAY');
+                b.setAttribute('class', 'btn');
+                b.innerHTML = 'PLAY';
+
+            }
         }
-
-        function rotateScene() {
-            new TWEEN.Tween(dae.rotation).to({
-                x: 0,
-                y: 10000,
-                z: 0
-            }, 15000).easing(TWEEN.Easing.Quadratic.Out).start();
-        }
-
-        console.log("Collada 0.1.7");
 
     </script>
-
 </body>
-
-</html>

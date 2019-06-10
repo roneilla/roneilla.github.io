@@ -121,27 +121,32 @@
         var video, videoImage, videoImageContext, videoTexture;
         var pc = 0;
 
-        var fish1, fishImage1, fishImageContext1, fishTexture1;
+        var fish, fishImage1, fishImageContext1, fishTexture1;
 
         ///// Create a video element.
 
-        video = document.createElement('video');
-        video.src = "videos/CORAL.mp4";
-        video.load();
+        var video = [document.createElement('video'), document.createElement('video')];
+        video[0].src = "videos/CORAL.mp4";
+        video[0].load();
+        video[1].src = "videos/FISH.mp4";
+        video[1].load();
 
-        videoImage = document.createElement('canvas');
+        var videoImage = [document.createElement('canvas'), document.createElement('canvas')];
         ///// When you change the video source, check it's resolution and change these values:
-        videoImage.width = 236;
-        videoImage.height = 214;
+        videoImage[0].width = 236;
+        videoImage[0].height = 214;
+        videoImage[1].width = 400;
+        videoImage[1].height = 400;
 
         videoImageContext = videoImage.getContext('2d');
-        ///// Background color if no video present.
         videoImageContext.fillStyle = '#000000';
         videoImageContext.fillRect(0, 0, videoImage.width, videoImage.height);
 
         videoTexture = new THREE.Texture(videoImage);
         videoTexture.minFilter = THREE.LinearFilter;
         videoTexture.magFilter = THREE.LinearFilter;
+
+
 
         var movieMaterial = new THREE.MeshBasicMaterial({
             map: videoTexture,
@@ -156,38 +161,7 @@
         movieScreen.scale.y = 1;
         movieScreen.scale.x = 1;
 
-        // movie screen 2
 
-        fish1 = document.createElement('video');
-        fish1.src = "videos/FISH.mp4";
-        fish1.load();
-
-        fishImage1 = document.createElement('canvas');
-        fishImage1.width = 402;
-        fishImage1.height = 418;
-
-        fishImageContext1 = fishImage1.getContext('2d');
-        fishImageContext1.fillStyle = '#000000';
-        fishImageContext1.fillRect(0, 0, fishImage1.width, fishImage1.height);
-
-        fishTexture1 = new THREE.Texture(fishImage1);
-        fishTexture1.minFilter = THREE.LinearFilter;
-        fishTexture1.magFilter = THREE.LinearFilter;
-
-        var fishMaterial1 = new THREE.MeshBasicMaterial({
-            map: fishTexture1,
-            overdraw: true,
-            side: THREE.DoubleSide
-        });
-
-        ///// The geometry on which the movie will be displayed.
-        ///// Movie image will be scaled to fit this size:
-        var fishGeometry1 = new THREE.PlaneGeometry(1, 1);
-        var fishScreen1 = new THREE.Mesh(fishGeometry1, fishMaterial1);
-        fishScreen1.rotation.x = -Math.PI / 2;
-        fishScreen1.position.set(0, 0, 0);
-        fishScreen1.scale.y = 1;
-        fishScreen1.scale.x = 1;
 
         ///// Custom Functions, these scale on the y-axis, add x and z for complete scaling (as an example).
         function Grow() {
@@ -299,12 +273,9 @@
 
             if (markerRoot1.visible === true) {
                 console.log("CORAL FOUND");
-                console.log(video);
             }
             if (markerRoot2.visible === true) {
                 console.log("FISH FOUND");
-                console.log(fish1);
-
 
             }
 

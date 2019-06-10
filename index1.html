@@ -1,0 +1,349 @@
+<!DOCTYPE html>
+<meta name="viewport" content="width=device-width, user-scalable=no, minimum-scale=1.0, maximum-scale=1.0">
+<!-- include three.js library -->
+<script src='js/three.js'></script>
+<script src='js/OBJLoader.js'></script>
+<script src='js/MTLLoader.js'></script>
+<script src='js/ColladaLoader.js'></script>
+<script src='js/tween.min.js'></script>
+<!-- include jsartookit -->
+<script src="jsartoolkit5/artoolkit.min.js">
+</script>
+<script src="jsartoolkit5/artoolkit.api.js"></script>
+<!-- include threex.artoolkit -->
+<script src="threex/threex-artoolkitsource.js"></script>
+<script src="threex/threex-artoolkitcontext.js"></script>
+<script src="threex/threex-arbasecontrols.js"></script>
+<script src="threex/threex-armarkercontrols.js"></script>
+
+<script>
+    THREEx.ArToolkitContext.baseURL = '/'
+
+</script>
+
+<style>
+    body {
+        background: #e2e2e2;
+        margin: 0px;
+        overflow: hidden;
+        font-family: Helvetica, Arial, Sans-Serif;
+    }
+
+    canvas {
+        position: absolute;
+        top: 0;
+        left: 0;
+    }
+
+    #button {
+        padding: 0;
+        margin: 0;
+        width: 100vw;
+        height: 12vh;
+        float: left;
+        position: relative;
+        text-align: center;
+    }
+
+    #button button {
+        margin-top: 90vh;
+        width: 20%;
+        height: 50%;
+        font-size: 100%;
+        color: white;
+        text-align: center;
+        z-index: 100;
+    }
+
+    #button:hover {
+        cursor: pointer;
+    }
+
+    #leftbutton:active {
+        background-color: green;
+        box-shadow: 0 5px #666;
+        transform: translateY(2px);
+    }
+
+    #rightbutton:active {
+        background-color: red;
+        box-shadow: 0 5px #666;
+        transform: translateY(2px);
+    }
+
+    #leftbutton {
+        width: 100%;
+        float: left;
+        background-color: rgba(150, 150, 150, 0.8);
+        position: relative;
+        margin-left: 15%;
+        border-radius: 5px;
+        line-height: 100%;
+    }
+
+    #rightbutton {
+        width: 100%;
+        float: right;
+        background-color: rgba(150, 150, 150, 0.8);
+        position: relative;
+        margin-right: 15%;
+        border-radius: 5px;
+    }
+
+    #middlebutton {
+        width: 100%;
+        background-color: rgba(150, 150, 150, 0.8);
+        border-radius: 5px;
+        position: inherit;
+    }
+
+</style>
+
+<body>
+    <div id="button">
+        <button id="leftbutton" onclick="Grow()">GROW</button>
+        <button id="middlebutton" onclick="playVideo()">PLAY</button>
+        <button id="rightbutton" onclick="Shrink()">SHRINK</button>
+    </div>
+
+    <script>
+        //By Lucas Di Monte 2018, contact me on facebook messenger for help.
+
+        ///// Init variables:
+        var renderer, scene, camera;
+        var arToolkitContext, onRenderFcts, arToolkitSource, markerRoot, markerRoot2, markerRoot3, artoolkitMarker, lastTimeMsec;
+        var params = {
+            opacity: 1
+        };
+        var btext = document.getElementsByTagName("BUTTON")[1].textContent;
+
+        ///// Video variables:
+        var video, videoImage, videoImageContext, videoTexture;
+        var pc = 0;
+
+        var fish1, fishImage1, fishImageContext1, fishTexture1;
+
+        ///// Create a video element.
+
+        video = document.createElement('video');
+        video.src = "videos/CORAL.mp4";
+        video.load();
+
+        videoImage = document.createElement('canvas');
+        ///// When you change the video source, check it's resolution and change these values:
+        videoImage.width = 236;
+        videoImage.height = 214;
+
+        videoImageContext = videoImage.getContext('2d');
+        ///// Background color if no video present.
+        videoImageContext.fillStyle = '#000000';
+        videoImageContext.fillRect(0, 0, videoImage.width, videoImage.height);
+
+        videoTexture = new THREE.Texture(videoImage);
+        videoTexture.minFilter = THREE.LinearFilter;
+        videoTexture.magFilter = THREE.LinearFilter;
+
+        var movieMaterial = new THREE.MeshBasicMaterial({
+            map: videoTexture,
+            overdraw: true,
+            side: THREE.DoubleSide
+        });
+
+        var movieGeometry = new THREE.PlaneGeometry(1, 1);
+        var movieScreen = new THREE.Mesh(movieGeometry, movieMaterial);
+        movieScreen.rotation.x = -Math.PI / 2;
+        movieScreen.position.set(0, 0, 0);
+        movieScreen.scale.y = 1;
+        movieScreen.scale.x = 1;
+
+        // movie screen 2
+
+        fish1 = document.createElement('video');
+        fish1.src = "videos/FISH.mp4";
+        fish1.load();
+
+        fishImage1 = document.createElement('canvas');
+        fishImage1.width = 402;
+        fishImage1.height = 418;
+
+        fishImageContext1 = fishImage1.getContext('2d');
+        fishImageContext1.fillStyle = '#000000';
+        fishImageContext1.fillRect(0, 0, fishImage1.width, fishImage1.height);
+
+        fishTexture1 = new THREE.Texture(fishImage1);
+        fishTexture1.minFilter = THREE.LinearFilter;
+        fishTexture1.magFilter = THREE.LinearFilter;
+
+        var fishMaterial1 = new THREE.MeshBasicMaterial({
+            map: fishTexture1,
+            overdraw: true,
+            side: THREE.DoubleSide
+        });
+
+        ///// The geometry on which the movie will be displayed.
+        ///// Movie image will be scaled to fit this size:
+        var fishGeometry1 = new THREE.PlaneGeometry(1, 1);
+        var fishScreen1 = new THREE.Mesh(fishGeometry1, fishMaterial1);
+        fishScreen1.rotation.x = -Math.PI / 2;
+        fishScreen1.position.set(0, 0, 0);
+        fishScreen1.scale.y = 1;
+        fishScreen1.scale.x = 1;
+
+        ///// Custom Functions, these scale on the y-axis, add x and z for complete scaling (as an example).
+        function Grow() {
+            console.log(movieScreen.scale);
+        }
+
+        function Shrink() {
+            movieScreen.scale.y -= 0.5;
+        }
+
+        ///// Function to play the video when the corresponding marker is in view.
+        function playVideo() {
+            if ((markerRoot2.visible === true)) {
+                video.play();
+                pc++;
+            }
+        }
+        init();
+
+        function init() {
+            renderer = new THREE.WebGLRenderer({
+                alpha: true
+            });
+            renderer.setClearColor(new THREE.Color('lightgrey'), 0);
+            renderer.setSize(window.innerWidth, window.innerHeight);
+            document.body.appendChild(renderer.domElement);
+            onRenderFcts = [];
+            scene = new THREE.Scene();
+            var ambient = new THREE.AmbientLight(0x666666);
+            scene.add(ambient);
+            var directionalLight = new THREE.DirectionalLight(0x4e5ba0);
+            directionalLight.position.set(-1, 1, 1).normalize();
+            scene.add(directionalLight);
+            camera = new THREE.Camera();
+            scene.add(camera);
+            arToolkitSource = new THREEx.ArToolkitSource({
+                sourceType: 'webcam',
+            });
+            arToolkitSource.init(function onReady() {
+
+                arToolkitSource.onResize(renderer.domElement)
+            });
+            window.addEventListener('resize', function() {
+                arToolkitSource.onResize(renderer.domElement)
+            });
+            arToolkitContext = new THREEx.ArToolkitContext({
+                cameraParametersUrl: 'data/camera_para.dat',
+                detectionMode: 'mono',
+                maxDetectionRate: 30,
+                canvasWidth: 80 * 3,
+                canvasHeight: 60 * 3,
+            });
+            arToolkitContext.init(function onCompleted() {
+                camera.projectionMatrix.copy(arToolkitContext.getProjectionMatrix());
+            });
+            onRenderFcts.push(function() {
+                if (arToolkitSource.ready === false) return
+                arToolkitContext.update(arToolkitSource.domElement)
+            });
+
+
+            // markers
+
+            markerRoot1 = new THREE.Group
+            scene.add(markerRoot1)
+            artoolkitMarker = new THREEx.ArMarkerControls(arToolkitContext, markerRoot1, {
+                type: 'pattern',
+                patternUrl: 'data/coral.patt'
+            });
+
+            markerRoot2 = new THREE.Group
+            scene.add(markerRoot2)
+            artoolkitMarker = new THREEx.ArMarkerControls(arToolkitContext, markerRoot2, {
+                type: 'pattern',
+                patternUrl: 'data/fish.patt'
+            });
+
+            markerRoot3 = new THREE.Group
+            scene.add(markerRoot3)
+            artoolkitMarker = new THREEx.ArMarkerControls(arToolkitContext, markerRoot3, {
+                type: 'pattern',
+                patternUrl: 'data/coral.patt'
+            });
+
+            ///// Assign sprites/elements to markers here.
+            markerRoot1.add(movieScreen);
+            markerRoot2.add(fishScreen1);
+
+            onRenderFcts.push(function() {});
+            onRenderFcts.push(function() {
+                renderer.render(scene, camera)
+            });
+            lastTimeMsec = null;
+            animate();
+        }
+
+        ///// Animation function:
+        function animate(nowMsec) {
+            requestAnimationFrame(animate);
+            lastTimeMsec = lastTimeMsec || nowMsec - 1000 / 60;
+            var deltaMsec = Math.min(200, nowMsec - lastTimeMsec);
+            lastTimeMsec = nowMsec;
+            pulse = Date.now() * 0.0009;
+            onRenderFcts.forEach(function(onRenderFct) {
+                onRenderFct(deltaMsec / 1000, nowMsec / 1000);
+            });
+
+
+            if (markerRoot1.visible === true) {
+                console.log("CORAL FOUND");
+                console.log(video);
+            }
+            if (markerRoot2.visible === true) {
+                console.log("FISH FOUND");
+                console.log(fish1);
+                console.log(fishImage1.width, fishImage1.height);
+
+
+            }
+
+            ///// Play the video texture if it's loaded.
+            if (video.readyState === video.HAVE_ENOUGH_DATA) {
+                videoImageContext.drawImage(video, 0, 0);
+                if (videoTexture)
+                    videoTexture.needsUpdate = true;
+            }
+
+            if (fish1.readyState === fish1.HAVE_ENOUGH_DATA) {
+                fishImageContext1.drawImage(fish1, 0, 0);
+                if (fishTexture1)
+                    fishTexture1.needsUpdate = true;
+            }
+
+            ///// Check if 'PLAY' is clicked, play the video, change 'PLAY' button text depending on video state.
+            if (pc >= 2) {
+                video.pause();
+                pc = 0;
+            }
+
+            if (pc == 1) {
+                btext = "PAUSE";
+                var b = document.getElementById('middlebutton');
+                b.setAttribute('content', 'PAUSE');
+                b.setAttribute('class', 'btn');
+                b.innerHTML = 'PAUSE';
+
+            }
+            if (pc != 1) {
+                btext = "PLAY";
+                var b = document.getElementById('middlebutton');
+                b.setAttribute('content', 'PLAY');
+                b.setAttribute('class', 'btn');
+                b.innerHTML = 'PLAY';
+
+            }
+        }
+
+    </script>
+</body>

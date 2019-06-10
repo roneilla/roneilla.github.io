@@ -161,13 +161,20 @@
 
             for (let i = 0; i < 6; i++) {
                 if (markerRootArray[i].visible) {
+                    renderer.setClearColor(0x000000, 50);
+
+
                     markerGroupArray[i].add(sceneGroup);
                     console.log("visible: " + patternArray[i]);
                     break;
+                } else {
+                    renderer.setClearColor(0xffffff, 0);
                 }
             }
 
         }
+
+
 
 
         function render() {

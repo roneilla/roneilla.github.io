@@ -39,6 +39,8 @@
 
         var dae;
 
+        var reveal = false;
+
         initialize();
         animate();
 
@@ -205,6 +207,9 @@
 
             if (markerRoot1.visible === true && markerRoot6.visible === false) {
                 markerRoot5.add(dae);
+            } else if (markerRoot6.visible === true) {
+                markerRoot5.remove(dae);
+
             }
 
             update();
@@ -212,7 +217,7 @@
             render();
         }
 
-        console.log("Multimarker 0.1.0");
+        console.log("Multimarker 0.1.1");
 
     </script>
 

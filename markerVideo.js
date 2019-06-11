@@ -3,7 +3,6 @@ class markerVideo {
         this.video = document.createElement('video');
         this.video.src = src;
         this.videoImage = document.createElement('canvas');
-
         this.loadTexture();
         this.loadGeometry();
     }

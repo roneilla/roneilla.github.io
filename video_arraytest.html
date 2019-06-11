@@ -125,43 +125,42 @@
 
         ///// Create a video element.
 
-        var video = [document.createElement('video'), document.createElement('video')];
-        video[0].src = "videos/CORAL.mp4";
-        video[0].load();
-        video[1].src = "videos/FISH.mp4";
-        video[1].load();
+        for (var i = 0; i < 6; i++) {
 
-        var videoImage = [document.createElement('canvas'), document.createElement('canvas')];
-        ///// When you change the video source, check it's resolution and change these values:
-        videoImage[0].width = 236;
-        videoImage[0].height = 214;
-        videoImage[1].width = 400;
-        videoImage[1].height = 400;
+            var video[i] = document.createElement('video');
+            video[0].src = "videos/CORAL.mp4";
+            video[0].load();
+            video[1].src = "videos/FISH.mp4";
+            video[1].load();
 
-        videoImageContext = videoImage.getContext('2d');
-        videoImageContext.fillStyle = '#000000';
-        videoImageContext.fillRect(0, 0, videoImage.width, videoImage.height);
+            var videoImage[i] = document.createElement('canvas');
+            ///// When you change the video source, check it's resolution and change these values:
+            videoImage[0].width = 236;
+            videoImage[0].height = 214;
+            videoImage[1].width = 400;
+            videoImage[1].height = 400;
 
-        videoTexture = new THREE.Texture(videoImage);
-        videoTexture.minFilter = THREE.LinearFilter;
-        videoTexture.magFilter = THREE.LinearFilter;
+            videoImageContext[i] = videoImage[i].getContext('2d');
+            videoImageContext[i].fillStyle = '#000000';
+            videoImageContext[i].fillRect(0, 0, videoImage[i].width, videoImage[i].height);
 
+            videoTexture[i] = new THREE.Texture(videoImage[i]);
+            videoTexture[i].minFilter = THREE.LinearFilter;
+            videoTexture[i].magFilter = THREE.LinearFilter;
 
+            var movieMaterial[i] = new THREE.MeshBasicMaterial({
+                map: videoTexture[i],
+                overdraw: true,
+                side: THREE.DoubleSide
+            });
 
-        var movieMaterial = new THREE.MeshBasicMaterial({
-            map: videoTexture,
-            overdraw: true,
-            side: THREE.DoubleSide
-        });
-
-        var movieGeometry = new THREE.PlaneGeometry(1, 1);
-        var movieScreen = new THREE.Mesh(movieGeometry, movieMaterial);
-        movieScreen.rotation.x = -Math.PI / 2;
-        movieScreen.position.set(0, 0, 0);
-        movieScreen.scale.y = 1;
-        movieScreen.scale.x = 1;
-
-
+            var movieGeometry[i] = new THREE.PlaneGeometry(1, 1);
+            var movieScreen[i] = new THREE.Mesh(movieGeometry[i], movieMaterial[i]);
+            movieScreen[i].rotation.x = -Math.PI / 2;
+            movieScreen[i].position.set(0, 0, 0);
+            movieScreen[i].scale.y = 1;
+            movieScreen[i].scale.x = 1;
+        }
 
         ///// Custom Functions, these scale on the y-axis, add x and z for complete scaling (as an example).
         function Grow() {

@@ -207,8 +207,11 @@
 
             if (markerRoot1.visible === true && markerRoot6.visible === false) {
                 markerRoot5.add(dae);
-            } else if (markerRoot6.visible === true) {
-                markerRoot5.remove(dae);
+            }
+
+            if (markerRoot6.visible === true) {
+                dae.dispose();
+                //  markerRoot5.remove(dae);
 
             }
 
@@ -217,7 +220,7 @@
             render();
         }
 
-        console.log("Multimarker 0.1.1");
+        console.log("Multimarker 0.1.2");
 
     </script>
 

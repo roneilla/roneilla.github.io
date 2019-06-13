@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<meta name="viewport" content="width=device-width, user-scalable=no, minimum-scale=1.0, maximum-scale=1.0">
+
+
+<script>
+    // change pattern ratio here 
+    var patternRatio = 0.5;
+
+</script>
+
+<!-- include three.js library -->
+<script src='js/three.js'></script>
+<script src='js/ColladaLoader.js'></script>
+<script src='js/tween.min.js'></script>
+
+<!-- include jsartookit -->
+<script src="jsartoolkit5/artoolkit.min.js"></script>
+<script src="jsartoolkit5/artoolkit.api.js"></script>
+
+<!-- include threex.artoolkit -->
+<script src="threex/threex-artoolkitsource.js"></script>
+<script src="threex/threex-artoolkitcontext.js"></script>
+<script src="threex/threex-arbasecontrols.js"></script>
+<script src="threex/threex-armarkercontrols.js"></script>
+
+<script>
+    THREEx.ArToolkitContext.baseURL = '/'
+
+</script>
+
+<link rel="stylesheet" href="index.css">
+
+<body>
+    <img id="button" src="images/button.svg" onclick="playVideo();">
+
+    <!-- create video objects using the markerVideo class -->
+    <script src="script_hiro/markerVideo.js"></script>
+
+    <!-- create markers using the marker class -->
+    <script src="script_hiro/marker.js"></script>
+    <script src="markerImage.js"></script>
+
+    <!-- declare your global variables in this script file -->
+    <script src="script_hiro/global.js"></script>
+
+    <!-- playVideo function -->
+    <script src="script_hiro/playVideo.js"></script>
+
+    <!-- initialize -->
+    <script src="script_hiro/initialize.js"></script>
+
+    <!-- add script in here -->
+    <script src="script_hiro/main.js"></script>
+
+    <!-- add animations in this script file -->
+    <script src="script_hiro/animate.js"></script>
+
+    <script>
+        init();
+
+    </script>
+
+
+
+</body>

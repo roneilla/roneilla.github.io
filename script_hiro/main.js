@@ -19,17 +19,17 @@
      marker1 = new Marker(
          scene,
          arToolkitContext,
-         'a.patt');
+         'illustrationMarker/a.patt');
 
      marker2 = new Marker(
          scene,
          arToolkitContext,
-         'aa.patt');
+         'illustrationMarker/aa.patt');
 
      marker3 = new Marker(
          scene,
          arToolkitContext,
-         'b.patt');
+         'illustrationMarker/b.patt');
  }
 
  function addAssets() {

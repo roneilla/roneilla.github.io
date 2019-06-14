@@ -48,11 +48,19 @@
 
  function visibility() {
      if (marker1.root.visible === true) {
-         playButton.style.visibility = "visible";
-
-         //console.log("marker 1 visible");
+         // playButton.style.visibility = "visible";
+         console.log("marker 1 visible");
      } else {
-         playButton.style.visibility = "hidden";
+         // playButton.style.visibility = "hidden";
+     }
+
+     if (marker2.root.visible === true) {
+         // playButton.style.visibility = "visible";
+         console.log("marker 2 visible");
+     }
+     if (marker3.root.visible === true) {
+         // playButton.style.visibility = "visible";
+         console.log("marker 3 visible");
      }
 
  }

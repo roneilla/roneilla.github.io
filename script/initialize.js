@@ -45,7 +45,6 @@ function initialize() {
         dae.scale.x = dae.scale.y = dae.scale.z = 0.25;
         dae.rotation.x = 135 * Math.PI / 180;
         dae.rotation.z = -90 * Math.PI / 180;
-
         dae.position.y = 2;
         dae.updateMatrix();
         markerAA.root.add(dae);

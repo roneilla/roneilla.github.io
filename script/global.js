@@ -27,6 +27,12 @@
   shark.setPosition(0, 0, 0);
   shark.load();
 
+  var crab = new markerVideo('videos/CRAB.mp4', 1, 1);
+  crab.setSize(134, 136);
+  crab.setRotation(-Math.PI / 2, 0, 0);
+  crab.setPosition(0, 0, 0);
+  crab.load();
+
   // image variables
 
   var image1 = new markerImage('images/SharkArMap_1.png');

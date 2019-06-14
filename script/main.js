@@ -36,7 +36,7 @@
      // add assets to marker roots here
 
      marker1.root.add(coral.movieScreen);
-     marker2.root.add(crab.movieScreen);
+     marker2.root.add(image1.sprite);
      marker3.root.add(shark.movieScreen);
  }
 

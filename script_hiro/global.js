@@ -14,7 +14,6 @@
   // marker variables
   var marker1, marker2, marker3, marker4, marker5, marker6, marker7, marker8, marker9;
 
-
   // declare video variables here
 
   var coral = new markerVideo('videos/CORAL.mp4');

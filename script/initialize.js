@@ -42,7 +42,7 @@ function initialize() {
     biomeLoader.options.convertUpAxis = true;
     biomeLoader.load('models/biome.dae', function (collada) {
         dae = collada.scene;
-        dae.scale.x = dae.scale.y = dae.scale.z = 0.5;
+        dae.scale.x = dae.scale.y = dae.scale.z = 0.1;
         dae.rotation.x = -Math.PI / 2;
         dae.position.y = 2;
         dae.updateMatrix();

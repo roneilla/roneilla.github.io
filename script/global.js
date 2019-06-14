@@ -17,20 +17,20 @@
   var marker1, marker2, marker3;
 
   // declare video variables here
-  var aVideo = new markerVideo('videos/a-video.mp4', 1, 1);
+  var aVideo = new markerVideo('videos/a-video.mp4', 4.48, 2.52);
   aVideo.setSize(2016, 726);
-  aVideo.setRotation(-Math.PI / 2, 0, 0);
+  aVideo.setRotation(-90 * Math.PI / 180, 0, 45 * Math.PI / 180);
   aVideo.setPosition(0, 0, 0);
   aVideo.load();
 
-  var bVideo = new markerVideo('videos/b-video.mp4', 1, 1);
+  var bVideo = new markerVideo('videos/b-video.mp4', 2, 2);
   bVideo.setSize(1080, 1080);
-  bVideo.setRotation(-Math.PI / 2, 0, 0);
+  bVideo.setRotation(-90 * Math.PI / 180, 0, 45 * Math.PI / 180);
   bVideo.setPosition(0, 0, 0);
   bVideo.load();
 
-  var dVideo = new markerVideo('videos/d-video.mp4', 1, 1);
+  var dVideo = new markerVideo('videos/d-video.mp4', 4.48, 2.52);
   dVideo.setSize(2016, 726);
-  dVideo.setRotation(-Math.PI / 2, 0, 0);
+  dVideo.setRotation(-90 * Math.PI / 180, 0, 45 * Math.PI / 180);
   dVideo.setPosition(0, 0, 0);
   dVideo.load();

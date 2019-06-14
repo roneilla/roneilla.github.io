@@ -51,8 +51,7 @@
      if (marker1.root.visible === true) {
          playButton.style.visibility = "visible";
          console.log("marker 1 visible");
-     }
-     if (marker3.root.visible === true) {
+     } else if (marker3.root.visible === true) {
          playButton.style.visibility = "visible";
 
          console.log("marker 3 visible");

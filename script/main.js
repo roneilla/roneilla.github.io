@@ -16,28 +16,33 @@
  }
 
  function createMarkers() {
-     marker1 = new marker(
+     markerA = new marker(
          scene,
          arToolkitContext,
          'customMarker/kayden/a.patt');
 
-     marker2 = new marker(
+     markerAA = new marker(
          scene,
          arToolkitContext,
          'customMarker/kayden/aa.patt');
 
-     marker3 = new marker(
+     markerB = new marker(
          scene,
          arToolkitContext,
          'customMarker/kayden/b.patt');
+
+     markerD = new marker(
+         scene,
+         arToolkitContext,
+         'customMarker/kayden/d.patt');
  }
 
  function addAssets() {
      // add assets to marker roots here
+     markerA.root.add(aVideo.movieScreen);
+     markerB.root.add(bVideo.movieScreen);
+     markerD.root.add(dVideo.movieScreen);
 
-     marker1.root.add(coral.movieScreen);
-     marker2.root.add(image1.sprite);
-     marker3.root.add(shark.movieScreen);
  }
 
  function assetsReady() {

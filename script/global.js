@@ -1,6 +1,8 @@
   var renderer, scene, camera;
   var arToolkitContext, onRenderFcts, arToolkitSource, markerRoot, lastTimeMsec;
 
+  var dae;
+
   var params = {
       opacity: 1
   };
@@ -15,26 +17,20 @@
   var marker1, marker2, marker3;
 
   // declare video variables here
-  var coral = new markerVideo('videos/CORAL.mp4', 1, 1);
-  coral.setSize(236, 214);
-  coral.setRotation(-Math.PI / 2, 0, 0);
-  coral.setPosition(0, 0, 0);
-  coral.load();
+  var aVideo = new markerVideo('videos/a-video.mp4', 1, 1);
+  aVideo.setSize(2016, 726);
+  aVideo.setRotation(-Math.PI / 2, 0, 0);
+  aVideo.setPosition(0, 0, 0);
+  aVideo.load();
 
-  var shark = new markerVideo('videos/SHARK.mp4', 1, 1);
-  shark.setSize(134, 136);
-  shark.setRotation(-Math.PI / 2, 0, 0);
-  shark.setPosition(0, 0, 0);
-  shark.load();
+  var bVideo = new markerVideo('videos/b-video.mp4', 1, 1);
+  bVideo.setSize(1080, 1080);
+  bVideo.setRotation(-Math.PI / 2, 0, 0);
+  bVideo.setPosition(0, 0, 0);
+  bVideo.load();
 
-  var crab = new markerVideo('videos/CRAB.mp4', 1, 1);
-  crab.setSize(134, 136);
-  crab.setRotation(-Math.PI / 2, 0, 0);
-  crab.setPosition(0, 0, 0);
-  crab.load();
-
-  // image variables
-
-  var image1 = new markerImage('images/SharkArMap_1.png');
-  image1.setSize(1, 1, 1);
-  image1.setPosition(0, 0, 0);
+  var dVideo = new markerVideo('videos/d-video.mp4', 1, 1);
+  dVideo.setSize(2016, 726);
+  dVideo.setRotation(-Math.PI / 2, 0, 0);
+  dVideo.setPosition(0, 0, 0);
+  dVideo.load();

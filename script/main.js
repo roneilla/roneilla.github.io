@@ -48,21 +48,26 @@
  }
 
  function markerVisibility() {
-     if (marker1.root.visible === true) {
+     if (marker1.root.visible === true || marker3.root.visible === true) {
          playButton.style.visibility = "visible";
-         console.log("marker 1 visible");
-     } else if (marker3.root.visible === true) {
-         playButton.style.visibility = "visible";
-
-         console.log("marker 3 visible");
      } else {
          playButton.style.visibility = "hidden";
 
      }
 
+     if (marker1.root.visible === true) {
+         console.log("marker 1 visible");
+     }
+
+     if (marker3.root.visible === true) {
+         console.log("marker 3 visible");
+     }
+
 
      if (marker2.root.visible === true) {
          console.log("marker 2 visible");
+         playButton.style.visibility = "hidden";
+
      }
 
 

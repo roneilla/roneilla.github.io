@@ -47,9 +47,9 @@
 
  function assetsReady() {
      // call the video assets' ready function in here
-     coral.ready();
-     crab.ready();
-     shark.ready();
+     aVideo.ready();
+     bVideo.ready();
+     dVideo.ready();
  }
 
  function markerVisibility() {

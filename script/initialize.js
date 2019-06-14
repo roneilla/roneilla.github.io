@@ -47,7 +47,6 @@ function initialize() {
         dae.position.y = 2;
         dae.updateMatrix();
         markerAA.root.add(dae);
-        render();
     });
 
 }

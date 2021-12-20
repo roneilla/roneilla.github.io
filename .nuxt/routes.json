@@ -1,0 +1,37 @@
+[
+  {
+    "name": "about",
+    "path": "/about",
+    "component": "/Users/roneillabumanlag/GitHub/roneilla.github.io/pages/about.vue",
+    "chunkName": "pages/about",
+    "_name": "_d87b7224"
+  },
+  {
+    "name": "afterhours",
+    "path": "/afterhours",
+    "component": "/Users/roneillabumanlag/GitHub/roneilla.github.io/pages/afterhours.vue",
+    "chunkName": "pages/afterhours",
+    "_name": "_05745222"
+  },
+  {
+    "name": "work",
+    "path": "/work",
+    "component": "/Users/roneillabumanlag/GitHub/roneilla.github.io/pages/work/index.vue",
+    "chunkName": "pages/work/index",
+    "_name": "_39e0197a"
+  },
+  {
+    "name": "work-tippt",
+    "path": "/work/tippt",
+    "component": "/Users/roneillabumanlag/GitHub/roneilla.github.io/pages/work/tippt.vue",
+    "chunkName": "pages/work/tippt",
+    "_name": "_701ae060"
+  },
+  {
+    "name": "index",
+    "path": "/",
+    "component": "/Users/roneillabumanlag/GitHub/roneilla.github.io/pages/index.vue",
+    "chunkName": "pages/index",
+    "_name": "_990bbc9a"
+  }
+]

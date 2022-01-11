@@ -3,6 +3,10 @@
 @tailwind utilities;
 
 html {
-  font-family: halyard-display, sans-serif;
-  font-size: 18px;
+	font-family: halyard-display, sans-serif;
+	font-size: 18px;
+}
+
+body {
+	background-color: #eee;
 }

@@ -17,7 +17,7 @@
 		>
 			<div class="md:flex-1">© Roneilla Bumanlag 2022</div>
 			<div class="md:flex-initial mt-4 md:m-0">
-				<a href="mailto:roneillabumanlag@gmail.com"
+				<a href="mailto:roneillabumanlag@gmail.com" data-cursor-hover
 					>roneillabumanlag@gmail.com</a
 				>
 			</div>
@@ -32,17 +32,28 @@
 				"
 			>
 				<li>
-					<a target="_blank" href="https://www.linkedin.com/in/roneilla/"
+					<a
+						target="_blank"
+						data-cursor-hover
+						href="https://www.linkedin.com/in/roneilla/"
 						>LinkedIn</a
 					>
 				</li>
 				<li>
-					<a target="_blank" href="https://www.instagram.com/eillamadethis/"
+					<a
+						target="_blank"
+						data-cursor-hover
+						href="https://www.instagram.com/eillamadethis/"
 						>Instagram</a
 					>
 				</li>
 				<li>
-					<a target="_blank" href="https://dribbble.com/roneilla">Dribbble</a>
+					<a
+						target="_blank"
+						data-cursor-hover
+						href="https://dribbble.com/roneilla"
+						>Dribbble</a
+					>
 				</li>
 			</ul>
 		</div>
@@ -55,7 +66,7 @@
 </template>
 
 <script>
-	export default {}
+	export default {};
 </script>
 
 <style scoped>

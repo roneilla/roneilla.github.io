@@ -1,7 +1,4 @@
-export { default as EyeAnimate } from '../../components/EyeAnimate.vue'
 export { default as Footer } from '../../components/Footer.vue'
-export { default as MainCaseStudy } from '../../components/MainCaseStudy.vue'
-export { default as Nav } from '../../components/Nav.vue'
 
 // nuxt/nuxt.js#8607
 function wrapFunctional(options) {

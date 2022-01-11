@@ -1,20 +1,41 @@
 <template>
-	<div>
-		<header>
-			<Nav />
-		</header>
-		<main>
-			<Nuxt />
-		</main>
-		<Footer />
+	<div class="bg-main-light">
+		<div class="outer-ctn">
+			<div class="w-full flex justify-center pt-4">
+				<img
+					class="star-img"
+					src="~/assets/images/star.png"
+					alt=""
+					data-aos="zoom-in"
+					data-aos-easing="ease"
+					data-aos-delay="400"
+				/>
+			</div>
+			<main class="bg-main-light py-8">
+				<Nuxt />
+			</main>
+			<Footer />
+		</div>
+		<cursor-fx color-hover="#ECB72D" />
 	</div>
 </template>
 
 <script>
-	export default {}
+	export default {};
 </script>
 
 <style>
+	.star-img {
+		width: 36px;
+		height: auto;
+		object-fit: contain;
+	}
+
+	.outer-ctn {
+		max-width: 1200px;
+		margin: auto;
+	}
+
 	body {
 		font-size: 18px;
 	}

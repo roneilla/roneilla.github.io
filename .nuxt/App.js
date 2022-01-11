@@ -11,9 +11,8 @@ import '../node_modules/@nuxtjs/tailwindcss/dist/runtime/tailwind.css'
 import '../assets/css/main.css'
 
 import _6f6c098b from '../layouts/default.vue'
-import _00e87e63 from '../layouts/project.vue'
 
-const layouts = { "_default": sanitizeComponent(_6f6c098b),"_project": sanitizeComponent(_00e87e63) }
+const layouts = { "_default": sanitizeComponent(_6f6c098b) }
 
 export default {
   render (h, props) {

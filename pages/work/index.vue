@@ -9,8 +9,8 @@
 		<div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
 			<div v-for="(caseStudy, index) in caseStudies" :key="index">
 				<NuxtLink :to="`/work/${caseStudy.link}`">
-					<div class="flex items-start justify-start my-8 flex-col">
-						<div class="flex-1 pr-6 order-2">
+					<div class="flex items-start justify-start my-8 flex-col gap-4">
+						<div class="flex-1 order-2">
 							<h3 class="mt-6 leading-tight">{{ caseStudy.title }}</h3>
 							<div>
 								<div
@@ -37,16 +37,16 @@
 </template>
 
 <script>
-	import { caseStudies } from '~/data.js'
+	import { caseStudies } from "~/data.js";
 
 	export default {
-		name: 'caseStudies',
+		name: "caseStudies",
 		data() {
 			return {
 				caseStudies: caseStudies,
-			}
+			};
 		},
-	}
+	};
 </script>
 
 <style scoped>

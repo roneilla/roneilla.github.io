@@ -5,6 +5,9 @@
   "Footer": {
     "description": "Auto imported from components/Footer.vue"
   },
+  "ImageLightbox": {
+    "description": "Auto imported from components/ImageLightbox.vue"
+  },
   "MainCaseStudy": {
     "description": "Auto imported from components/MainCaseStudy.vue"
   },

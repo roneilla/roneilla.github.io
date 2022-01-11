@@ -14,9 +14,10 @@
 						my-8
 						flex-col
 						md:flex-row
+						gap-4
 					"
 				>
-					<div class="flex-1 pr-6 order-2 md:order-1">
+					<div class="flex-1 order-2 md:order-1">
 						<h3 class="my-2 leading-tight">{{ caseStudy.title }}</h3>
 						<div class="my-2">
 							<div
@@ -39,16 +40,16 @@
 </template>
 
 <script>
-	import { caseStudies } from '~/data.js'
+	import { caseStudies } from "~/data.js";
 
 	export default {
-		name: 'caseStudies',
+		name: "caseStudies",
 		data() {
 			return {
 				caseStudies: caseStudies,
-			}
+			};
 		},
-	}
+	};
 </script>
 
 <style scoped>

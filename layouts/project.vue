@@ -1,12 +1,16 @@
 <template>
 	<div>
-		<h2>Work sample</h2>
+		<header>
+			<Nav />
+		</header>
 		<Nuxt />
+		<div></div>
+		<Footer />
 	</div>
 </template>
 
 <script>
-	export default {}
+	export default {};
 </script>
 
 <style>

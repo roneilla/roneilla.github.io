@@ -14,6 +14,13 @@
     "_name": "_05745222"
   },
   {
+    "name": "test",
+    "path": "/test",
+    "component": "/Users/roneillabumanlag/GitHub/roneilla.github.io/pages/test.vue",
+    "chunkName": "pages/test",
+    "_name": "_6815d1c1"
+  },
+  {
     "name": "work",
     "path": "/work",
     "component": "/Users/roneillabumanlag/GitHub/roneilla.github.io/pages/work/index.vue",

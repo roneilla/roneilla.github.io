@@ -1,5 +1,6 @@
 export { default as EyeAnimate } from '../../components/EyeAnimate.vue'
 export { default as Footer } from '../../components/Footer.vue'
+export { default as ImageLightbox } from '../../components/ImageLightbox.vue'
 export { default as MainCaseStudy } from '../../components/MainCaseStudy.vue'
 export { default as Nav } from '../../components/Nav.vue'
 

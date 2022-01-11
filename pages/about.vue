@@ -15,8 +15,8 @@
 				</span>
 			</div>
 		</div>
-		<div class="flex flex-col md:flex-row">
-			<div class="about-me flex-1 mr-4">
+		<div class="flex flex-col md:flex-row gap-4">
+			<div class="about-me flex-1">
 				<h2 class="text-3xl mt-4">Hi, I’m Roneilla!</h2>
 				<p class="text-xl mb-4">pronounced ro-NEY-la • she/her</p>
 				<p class="my-2">
@@ -113,7 +113,7 @@
 </template>
 
 <script>
-	export default {}
+	export default {};
 </script>
 
 <style scoped>

@@ -10,12 +10,13 @@
 					md:flex-row
 					justify-end
 					md:justify-start
+					gap-4
 				"
 			>
-				<h1 class="md:flex-1 leading-none md:self-end md:pr-2">
+				<h1 class="md:flex-1 leading-none md:self-end">
 					Interaction Designer &amp; Creative Developer based in Toronto.
 				</h1>
-				<p class="md:flex-1 md:self-end md:pl-2 mt-4 md:mt-0">
+				<p class="md:flex-1 md:self-end mt-4 md:mt-0">
 					Currently creating brand experiences at ASTOUND Group.
 					<br />
 					Open to freelance opportunities beginning February 2022!
@@ -38,11 +39,11 @@
 </template>
 
 <script>
-	import MainCaseStudy from '../components/MainCaseStudy.vue'
+	import MainCaseStudy from "../components/MainCaseStudy.vue";
 	export default {
 		components: { MainCaseStudy },
-		name: 'IndexPage',
-	}
+		name: "IndexPage",
+	};
 </script>
 
 <style scoped>

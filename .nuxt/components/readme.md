@@ -8,5 +8,6 @@ You can directly use them in pages and other components without the need to impo
 
 - `<EyeAnimate>` | `<eye-animate>` (components/EyeAnimate.vue)
 - `<Footer>` | `<footer>` (components/Footer.vue)
+- `<ImageLightbox>` | `<image-lightbox>` (components/ImageLightbox.vue)
 - `<MainCaseStudy>` | `<main-case-study>` (components/MainCaseStudy.vue)
 - `<Nav>` | `<nav>` (components/Nav.vue)

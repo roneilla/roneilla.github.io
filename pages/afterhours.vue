@@ -6,8 +6,8 @@
 					These are some of the side projects I'm working on:
 				</h2>
 			</div>
-			<div class="flex flex-col md:flex-row">
-				<div class="flex-1 my-4 md:mr-2">
+			<div class="flex flex-col md:flex-row gap-4">
+				<div class="flex-1 my-4">
 					<h3>A financial tracker for new adults</h3>
 					<p>Why?</p>
 					<ul class="list-disc pl-4">
@@ -15,7 +15,7 @@
 						<li>Improve my development and UX design skills</li>
 					</ul>
 				</div>
-				<div class="flex-1 my-4 md:mx-2">
+				<div class="flex-1 my-4">
 					<h3>A memory journal web app</h3>
 					<p>Why?</p>
 					<ul class="list-disc pl-4">
@@ -25,7 +25,7 @@
 						</li>
 					</ul>
 				</div>
-				<div class="flex-1 my-4 md:ml-2"><EyeAnimate /></div>
+				<div class="flex-1 my-4"><EyeAnimate /></div>
 			</div>
 			<div class="md:text-center my-4">
 				Interested in learning more or working together? Contact me!
@@ -43,10 +43,10 @@
 </template>
 
 <script>
-	import EyeAnimate from '../components/EyeAnimate.vue'
+	import EyeAnimate from "../components/EyeAnimate.vue";
 	export default {
 		components: { EyeAnimate },
-	}
+	};
 </script>
 
 <style scoped>

@@ -1,23 +1,16 @@
+/** @type {import('tailwindcss').Config} */
 module.exports = {
-  content: [
-    './components/**/*.{js,vue,ts}',
-    './layouts/**/*.vue',
-    './pages/**/*.vue',
-    './plugins/**/*.{js,ts}',
-    './nuxt.config.{js,ts}',
-  ],
-  purge: [],
-  darkMode: false, // or 'media' or 'class'
-  theme: {
-    colors: {
-      black: '#000000',
-      'main-light': '#eeeeee',
-      grey: '#666666',
-    },
-    extend: {},
-  },
-  variants: {
-    extend: {},
-  },
-  plugins: [],
-}
+	content: ['./src/**/*.{js,jsx,ts,tsx}'],
+	theme: {
+		colors: {
+			'primary': '#0F5862',
+			'background': '#F6F2EB',
+		},
+		fontFamily: {
+			sans: ['Neue Montreal', 'sans-serif'],
+			serif: ['PP Eiko', 'serif'],
+		},
+		extend: {},
+	},
+	plugins: [],
+};

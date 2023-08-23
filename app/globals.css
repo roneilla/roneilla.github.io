@@ -3,25 +3,80 @@
 @tailwind utilities;
 
 :root {
-  --foreground-rgb: 0, 0, 0;
-  --background-start-rgb: 214, 219, 220;
-  --background-end-rgb: 255, 255, 255;
+	--foreground-rgb: 0, 0, 0;
+	--background-start-rgb: 214, 219, 220;
+	--background-end-rgb: 255, 255, 255;
 }
 
 @media (prefers-color-scheme: dark) {
-  :root {
-    --foreground-rgb: 255, 255, 255;
-    --background-start-rgb: 0, 0, 0;
-    --background-end-rgb: 0, 0, 0;
-  }
+	:root {
+		--foreground-rgb: 255, 255, 255;
+		--background-start-rgb: 0, 0, 0;
+		--background-end-rgb: 0, 0, 0;
+	}
 }
 
 body {
-  color: rgb(var(--foreground-rgb));
-  background: linear-gradient(
-      to bottom,
-      transparent,
-      rgb(var(--background-end-rgb))
-    )
-    rgb(var(--background-start-rgb));
+	-webkit-font-smoothing: antialiased;
+}
+
+.buttonWithArrow {
+	border-radius: 100px;
+	background-color: #000000;
+	border: none;
+	color: #fff;
+	text-align: center;
+
+	font-size: 14px;
+
+	padding: 8px 16px;
+
+	transition: all 0.5s;
+	cursor: pointer;
+
+	cursor: pointer;
+	display: inline-block;
+	position: relative;
+	transition: 0.5s;
+}
+
+.buttonWithArrow:after {
+	content: '→';
+	position: absolute;
+	opacity: 0;
+	top: 8px;
+	right: -8px;
+	transition: 0.5s;
+}
+
+.buttonWithArrow:hover {
+	padding-right: 30px;
+	padding-left: 8px;
+}
+
+.buttonWithArrow:hover:after {
+	opacity: 1;
+	right: 10px;
+}
+
+@layer components {
+	.h1 {
+		@apply font-medium text-3xl;
+	}
+
+	.h2 {
+		@apply font-medium text-xl;
+	}
+
+	.navlink {
+		@apply text-base hover:bg-gray-100 rounded-full px-2 py-1;
+	}
+
+	.page {
+		@apply max-w-screen-lg mx-auto;
+	}
+
+	.secttion {
+		@apply p-4;
+	}
 }

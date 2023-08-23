@@ -1,20 +1,23 @@
-import React from 'react'
-import { Arrow } from '../assets/Arrow'
-import Asperand from '../assets/Asperand'
-import { useMatch, useNavigate } from 'react-router-dom'
-import { motion } from 'framer-motion'
-
+import React from 'react';
+import { Arrow } from '../assets/Arrow';
+import Asperand from '../assets/Asperand';
+import { Link, useMatch, useNavigate } from 'react-router-dom';
+import { motion } from 'framer-motion';
 
 export const Nav = () => {
+	const isHome = useMatch('/');
+	const navigate = useNavigate();
 
-  const isHome = useMatch('/')
-  const navigate = useNavigate()
+	const transition = { duration: 0.2, ease: [0.17, 0.67, 0.83, 0.67] };
 
-  const transition = { duration: 0.2, ease: [0.17, 0.67, 0.83, 0.67] }
-
-  return (
-    <div className={`flex px-4 pt-3 pb-2 justify-between items-center`} >
-      <div className="basis-12">
+	return (
+		<div className={`flex px-4 pt-3 pb-2 justify-between items-center`}>
+			<div className=" basis-12">
+				<p className="font-serif font-bold text-2xl">
+					<Link to="/">RB</Link>
+				</p>
+			</div>
+			{/* <div className="basis-12">
         {!isHome &&
           <motion.div
             key="backArrow"
@@ -28,22 +31,22 @@ export const Nav = () => {
             <Arrow />
           </ motion.div>
         }
-      </div>
+      </div> */}
 
-      <h1 className='grow text-center font-serif font-medium text-xl text-primary'>Roneilla Bumanlag</h1>
+			<div className="basis-12">Info</div>
 
-      <div className='text-right basis-12'>
-        <motion.div
-          key='asperand'
-          transition={transition}
-          whileHover={{ scale: 1.2 }}
-          initial={{ opacity: 0 }}
-          animate={{ opacity: 1 }}
-          exit={{ opacity: 0 }}
-          className='inline-block cursor-pointer bg-background hover:bg-primary fill-primary hover:fill-background p-3 rounded-full border-primary border-solid border'>
-          <Asperand />
-        </ motion.div>
-      </div>
-    </div >
-  )
-}
+			{/* <div className="text-right basis-12">
+				<motion.div
+					key="asperand"
+					transition={transition}
+					whileHover={{ scale: 1.2 }}
+					initial={{ opacity: 0 }}
+					animate={{ opacity: 1 }}
+					exit={{ opacity: 0 }}
+					className="inline-block cursor-pointer bg-background hover:bg-primary fill-primary hover:fill-background p-3 rounded-full border-primary border-solid border">
+					<Asperand />
+				</motion.div>
+			</div> */}
+		</div>
+	);
+};

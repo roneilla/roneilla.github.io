@@ -1,5 +1,5 @@
 import React, { useState } from 'react'
-import { createBrowserRouter, RouterProvider, useOutlet } from 'react-router-dom';
+import { createBrowserRouter, RouterProvider, useOutlet, Outlet } from 'react-router-dom';
 import { AnimatePresence, motion } from 'framer-motion';
 import SplinterDimensional from './pages/projects/SplinterDimensional';
 import Tippt from './pages/projects/Tippt';
@@ -9,12 +9,12 @@ import Home from './pages/Home';
 import Error from './pages/Error';
 import { Nav } from './components/Nav';
 
-const AnimatedOutlet = () => {
-	const o = useOutlet();
-	const [outlet] = useState(o);
+// const AnimatedOutlet = () => {
+// 	const o = useOutlet();
+// 	const [outlet] = useState(o);
 
-	return <>{outlet}</>;
-}
+// 	return <>{outlet}</>;
+// }
 
 
 const AppLayout = () => {
@@ -28,7 +28,7 @@ const AppLayout = () => {
 					animate={{ opacity: 1, x: 0 }}
 					exit={{ opacity: 0, x: 50 }}
 				>
-					<AnimatedOutlet />
+					<Outlet />
 				</motion.div>
 			</AnimatePresence>
 		</>

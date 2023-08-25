@@ -1,6 +1,9 @@
+'use client';
+
 import React from 'react';
 import Link from 'next/link';
 import Button from './Button';
+import ThemeSwitcher from './ThemeSwitcher';
 
 const Nav = () => {
 	return (
@@ -20,7 +23,8 @@ const Nav = () => {
 					<div className="navlink">Info</div>
 				</Link>
 			</nav>
-			<div className="flex-1 text-right">
+			<div className="flex-1 flex justify-end gap-4">
+				<ThemeSwitcher />
 				<Button>Contact me</Button>
 			</div>
 		</div>

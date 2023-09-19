@@ -1,11 +1,11 @@
 import React from 'react';
 
-const WorkCard = ({ bgColor, title, description }: any) => {
+const WorkCard = ({ title, description }: any) => {
 	return (
-		<div className={`p-6 rounded`} style={{ backgroundColor: bgColor }}>
+		<div className="workCard">
 			<img src="" alt="" className="bg-gray-200 rounded h-72" />
-			<p className="font-medium text-xl mt-4 mb-2">{title}</p>
-			<p>{description}</p>
+			<p className="font-medium text-xl mt-2">{title}</p>
+			<p className="text-gray-400">{description}</p>
 		</div>
 	);
 };

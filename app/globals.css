@@ -2,6 +2,15 @@
 @tailwind components;
 @tailwind utilities;
 
+@font-face {
+	font-family: 'PP Neue World Sm Extd';
+	src: url('PPNeueWorld-SemiExtendedUltralight.woff2') format('woff2'),
+		url('PPNeueWorld-SemiExtendedUltralight.woff') format('woff');
+	font-weight: 200;
+	font-style: normal;
+	font-display: swap;
+}
+
 :root {
 	--foreground-rgb: 0, 0, 0;
 	--background-start-rgb: 214, 219, 220;
@@ -18,6 +27,7 @@
 
 body {
 	-webkit-font-smoothing: antialiased;
+	font-family: 'PP Neue Montreal', sans-serif;
 }
 
 .buttonWithArrow {
@@ -59,9 +69,13 @@ body {
 	left: 8px;
 }
 
+.displayFont {
+	font-family: 'PP Neue World Sm Extd', sans-serif;
+}
+
 @layer components {
 	.h1 {
-		@apply font-medium text-3xl;
+		@apply text-7xl;
 	}
 
 	.h2 {
@@ -73,7 +87,7 @@ body {
 	}
 
 	.page {
-		@apply max-w-screen-lg mx-auto;
+		@apply max-w-screen-2xl mx-auto;
 	}
 
 	.section {
@@ -83,4 +97,13 @@ body {
 	.body {
 		@apply bg-white dark:bg-black text-black dark:text-white;
 	}
+}
+
+.workCard {
+	flex-basis: calc(50% - 32px);
+}
+
+.workCard img {
+	height: calc(50vw - 32px);
+	max-height: 500px;
 }

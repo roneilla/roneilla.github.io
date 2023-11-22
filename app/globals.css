@@ -100,10 +100,12 @@ body {
 }
 
 .workCard {
-	flex-basis: calc(50% - 32px);
+	width: 33.33%;
 }
 
-.workCard img {
-	height: calc(50vw - 32px);
-	max-height: 500px;
+.workCardImg {
+	width: 100%;
+	height: auto;
+	/* height: calc(33.33vw - 32px);
+	max-height: 300px; */
 }

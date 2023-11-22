@@ -17,7 +17,11 @@ const ThemeContainer = ({ children }: { children: React.ReactNode }) => {
 		}
 	}, []);
 
-	return <div className={`${darkMode ? 'dark' : 'light'}`}>{children}</div>;
+	return (
+		<>
+			<div className={`${darkMode ? 'dark' : 'light'}`}>{children}</div>
+		</>
+	);
 };
 
 export default ThemeContainer;

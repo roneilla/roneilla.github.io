@@ -10,10 +10,10 @@ const Home = () => {
 		<>
 			<div className="w-full px-8">
 				<div className="mt-8 sm:w-1/2 md:w-2/3">
-					<div className="h1 displayFont">
+					<h1 className="h1 displayFont">
 						Roneilla <br />
 						Bumanlag
-					</div>
+					</h1>
 				</div>
 
 				<div className="mt-8 sm:w-1/2 md:w-1/3 ml-auto">

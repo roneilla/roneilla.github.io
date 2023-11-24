@@ -11,7 +11,7 @@ const WorkCard = ({ title, description, imgSrc, link }: any) => {
 					alt=""
 					className="bg-gray-200 rounded h-72 workCardImg"
 				/>
-				<p className="font-medium text-xl mt-2">{title}</p>
+				<p className=" text-xl mt-2">{title}</p>
 				<p className="text-gray-400">{description}</p>
 			</Link>
 		</div>

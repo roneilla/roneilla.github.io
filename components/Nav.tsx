@@ -27,7 +27,7 @@ const Nav = () => {
 
 	const properties = {
 		start: {
-			top: '100vw',
+			top: '100vh',
 			redD: 200,
 			blueD: 100,
 			yellowD: 0,
@@ -79,15 +79,15 @@ const Nav = () => {
 
 			<animated.div
 				style={red}
-				className="w-full fixed left-0 h-full bg-red-700"
+				className="w-full fixed left-0 h-full bg-red-700 z-50"
 			/>
 			<animated.div
 				style={blue}
-				className="w-full fixed left-0 h-full bg-blue-700"
+				className="w-full fixed left-0 h-full bg-blue-700 z-50"
 			/>
 			<animated.div
 				style={yellow}
-				className="w-full fixed left-0 h-full bg-yellow-600"
+				className="w-full fixed left-0 h-full bg-yellow-600 z-50"
 			/>
 		</div>
 	);

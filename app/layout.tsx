@@ -5,6 +5,7 @@ import Footer from '@/components/Footer';
 import ThemeContainer from '@/components/ThemeContainer';
 import useTheme from '@/utils/useTheme';
 import Loader from '@/components/Loader';
+import PageTransition from '@/components/PageTransition';
 
 export const metadata: Metadata = {
 	title: 'Create Next App',
@@ -25,6 +26,7 @@ export default function RootLayout({
 					<div className="page">{children}</div>
 				</ThemeContainer>
 				<Footer />
+				<PageTransition />
 			</body>
 		</html>
 	);

@@ -75,11 +75,11 @@ body {
 
 @layer components {
 	.h1 {
-		@apply text-7xl;
+		@apply text-5xl md:text-6xl;
 	}
 
 	.h2 {
-		@apply font-medium text-xl;
+		@apply font-medium text-xl md:text-5xl;
 	}
 
 	.navlink {
@@ -108,4 +108,35 @@ body {
 	height: auto;
 	/* height: calc(33.33vw - 32px);
 	max-height: 300px; */
+}
+
+.lightBoxImg {
+	width: auto;
+	max-height: calc(100vh - 48px);
+	object-fit: contain;
+}
+
+.imgHeight {
+}
+
+.gifContainer {
+	@apply p-8 lg:p-16 flex items-center justify-center box-border;
+	max-height: calc(100vh - 8rem);
+}
+
+.gifContainer img {
+	height: 100%;
+	width: auto;
+}
+
+.pink {
+	background-color: #f5bffa;
+}
+
+.blue {
+	background-color: #bfdefc;
+}
+
+.purple {
+	background-color: #e8c0fe;
 }

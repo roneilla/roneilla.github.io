@@ -1,0 +1,251 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@font-face {
+	font-family: 'PP Neue World Sm Extd';
+	src: url('PPNeueWorld-SemiExtendedUltralight.woff2') format('woff2'),
+		url('PPNeueWorld-SemiExtendedUltralight.woff') format('woff');
+	font-weight: 200;
+	font-style: normal;
+	font-display: swap;
+}
+
+:root {
+	--foreground-rgb: 0, 0, 0;
+	--background-start-rgb: 214, 219, 220;
+	--background-end-rgb: 255, 255, 255;
+}
+
+/* width */
+::-webkit-scrollbar {
+	width: 6px;
+}
+
+/* Track */
+::-webkit-scrollbar-track {
+	@apply bg-white dark:bg-black;
+}
+
+/* Handle */
+::-webkit-scrollbar-thumb {
+	@apply border-white border border-solid;
+	background: #dcddfb;
+
+	border-radius: 50px;
+}
+
+/* Handle on hover */
+::-webkit-scrollbar-thumb:hover {
+	background: #dcddfb;
+}
+
+@media (prefers-color-scheme: dark) {
+	:root {
+		--foreground-rgb: 255, 255, 255;
+		--background-start-rgb: 0, 0, 0;
+		--background-end-rgb: 0, 0, 0;
+	}
+}
+
+.svgLogo {
+	@apply fill-black dark:fill-white;
+}
+
+body {
+	/* cursor: url('assets/arrow.png'), auto; */
+
+	-webkit-font-smoothing: antialiased;
+	font-family: 'PP Neue Montreal', sans-serif;
+
+	background: #dcddfb;
+}
+
+::selection {
+	background-color: #dcddfb;
+	color: black;
+}
+
+* {
+	transition: background-color 0.25s ease-in;
+}
+
+.button {
+	@apply rounded-full;
+	background-color: white;
+	border: 1px solid black;
+	color: black;
+	text-align: center;
+
+	font-size: 14px;
+
+	padding: 8px 16px;
+
+	transition: all 0.5s;
+	cursor: pointer;
+
+	cursor: pointer;
+	display: inline-block;
+	position: relative;
+	transition: 0.5s;
+}
+
+.buttonWithArrow:after {
+	content: '←';
+	position: absolute;
+	opacity: 0;
+	top: 8px;
+	left: -8px;
+	transition: 0.5s;
+}
+
+.buttonWithArrow:hover {
+	padding-left: 30px;
+	padding-right: 8px;
+}
+
+.buttonWithArrow:hover:after {
+	opacity: 1;
+	left: 8px;
+}
+
+.displayFont {
+	font-family: 'PP Neue World Sm Extd', sans-serif;
+}
+
+@layer components {
+	.h1 {
+		@apply text-5xl sm:text-7xl;
+	}
+
+	.h2 {
+		@apply font-medium text-3xl sm:text-5xl;
+	}
+
+	.navlink {
+		@apply text-base hover:bg-gray-100 rounded-full px-2 py-1;
+	}
+
+	.page {
+		@apply max-w-screen-2xl mx-auto z-10 relative bg-white dark:bg-black pb-1;
+
+		border-radius: 0 0 30px 30px;
+
+		margin-bottom: 150px;
+	}
+
+	.section {
+		@apply w-full px-8 md:px-12 py-8;
+	}
+
+	.body {
+		@apply text-black dark:text-white;
+	}
+}
+
+.workCard {
+	width: 33.33%;
+}
+
+.workCardImg {
+	width: 100%;
+	height: auto;
+	/* height: calc(33.33vw - 32px);
+	max-height: 300px; */
+	box-sizing: border-box;
+	transition: border 0.2s ease-in;
+}
+
+.workCardImg:hover {
+	/* border: 8px solid #dcddfb; */
+}
+
+.lightBoxImg {
+	width: auto;
+	max-height: calc(100vh - 4rem);
+	object-fit: contain;
+}
+
+.imgHeight {
+}
+
+.imgContainer {
+	@apply p-8 lg:p-16 flex items-center justify-center box-border rounded;
+	max-height: calc(100vh - 8rem);
+}
+
+.phoneImg {
+	height: 100%;
+	width: auto;
+	max-height: calc(100vh - 12rem);
+}
+
+.sd-pink {
+	background-color: #f5bffa;
+}
+
+.sd-blue {
+	background-color: #bfdefc;
+}
+
+.sd-purple {
+	background-color: #e8c0fe;
+}
+
+.freshii-green {
+	background-color: #639760;
+}
+
+.tpol-yellow {
+	background-color: #f0c418;
+}
+
+.tpol-blue {
+	background-color: #4f73b6;
+}
+.trans {
+	top: 100vh;
+}
+
+.backdrop {
+	@apply fixed top-0 left-0 w-screen h-screen z-40 bg-black;
+}
+
+.lightbox {
+	@apply scale-0 fixed top-0 left-0 w-screen h-screen p-4 z-50 flex items-center justify-center flex-col origin-center;
+}
+
+.lightbox img {
+	@apply w-auto h-auto object-contain;
+	max-height: calc(100vh - 4rem);
+	max-height: 100%;
+}
+
+.navLogo {
+	max-height: 1.5rem;
+	width: auto;
+	cursor: pointer;
+}
+
+.footer {
+	@apply fixed bottom-0 w-full p-8 box-border flex  justify-between;
+
+	height: 150px;
+	background-color: #dcddfb;
+
+	z-index: 1;
+}
+
+.r-p1 {
+	background-color: #adaedd;
+}
+.r-p2 {
+	background-color: #dcddfb;
+}
+.r-p3 {
+	background-color: #f2f3fd;
+}
+
+.purple-border {
+	border-bottom: 1px solid #dcddfb;
+}

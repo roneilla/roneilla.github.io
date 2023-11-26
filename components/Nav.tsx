@@ -1,18 +1,26 @@
 'use client';
 
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import Button from './Button';
 import ThemeSwitcher from './ThemeSwitcher';
-import { useRouter } from 'next/navigation';
+import { usePathname, useRouter } from 'next/navigation';
 import { useSpring, animated } from 'react-spring';
+import Image from 'next/image';
+import useTheme from '@/utils/useTheme';
+import Logo from './Logo';
 
 const Nav = () => {
+	const pathname = usePathname();
 	const router = useRouter();
 
 	const [loading, setLoading] = useState(false);
 
+	const { theme } = useTheme();
+
 	const handleClick = ({ e, link }: any) => {
 		e.preventDefault();
+
+		if (pathname === '/') return;
 
 		setLoading(true);
 
@@ -56,40 +64,49 @@ const Nav = () => {
 	});
 
 	return (
-		<div className="flex gap-4 px-4 py-1 items-center">
-			<div className="flex-1">
-				<p className="font-medium">Roneilla</p>
-			</div>
+		<>
+			<animated.div
+				className={`bg-white dark:bg-black flex gap-4 px-8 md:px-12 py-2 items-center z-30 `}>
+				{pathname != '/' ? (
+					<Button
+						withArrow={true}
+						handleClick={(e: any) => handleClick({ e, link: '/' })}>
+						Back to home
+					</Button>
+				) : (
+					<div onClick={(e) => handleClick({ e, link: '/' })}>
+						<div className="navLogo">
+							<Logo />
+						</div>
 
-			<nav className="flex flex-1 gap-4 justify-center items-center p-2">
-				<div onClick={(e) => handleClick({ e, link: '/' })}>
-					<div className="navlink">Home</div>
+						{/* <Image
+							style={{ fill: 'white' }}
+							src={Logo}
+							className="navLogo"
+							alt="A logo depicting an ampersand "
+						/> */}
+					</div>
+				)}
+
+				<div className="flex-1 flex items-center justify-end gap-4">
+					<ThemeSwitcher />
+					{/* <Button>Contact me</Button> */}
 				</div>
-				{/* <Link href="/work">
-					<div className="navlink">Work</div>
-				</Link> */}
-				<div onClick={(e) => handleClick({ e, link: '/info' })}>
-					<div className="navlink">Info</div>
-				</div>
-			</nav>
-			<div className="flex-1 flex justify-end gap-4">
-				<ThemeSwitcher />
-				<Button>Contact me</Button>
-			</div>
+			</animated.div>
 
 			<animated.div
 				style={red}
-				className="w-full fixed left-0 h-full bg-red-700 z-50"
+				className="w-full fixed left-0 h-full r-p3 z-50"
 			/>
 			<animated.div
 				style={blue}
-				className="w-full fixed left-0 h-full bg-blue-700 z-50"
+				className="w-full fixed left-0 h-full r-p2 z-50"
 			/>
 			<animated.div
 				style={yellow}
-				className="w-full fixed left-0 h-full bg-yellow-600 z-50"
+				className="w-full fixed left-0 h-full r-p1 z-50"
 			/>
-		</div>
+		</>
 	);
 };
 

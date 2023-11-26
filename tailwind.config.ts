@@ -14,6 +14,11 @@ const config: Config = {
 					'conic-gradient(from 180deg at 50% 50%, var(--tw-gradient-stops))',
 			},
 		},
+		borderRadius: {
+			none: '0',
+			DEFAULT: '10px',
+			full: '9999px',
+		},
 	},
 	plugins: [],
 	darkMode: 'class',

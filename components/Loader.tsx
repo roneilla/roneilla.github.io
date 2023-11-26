@@ -8,11 +8,7 @@ const Loader = () => {
 
 	if (theme) return;
 
-	return (
-		<div className="w-screen h-screen top-0 left-0 fixed bg-slate-400 z-50">
-			Loader
-		</div>
-	);
+	return <div className="w-screen h-screen top-0 left-0 fixed r-p2 z-50"></div>;
 };
 
 export default Loader;

@@ -1,11 +1,8 @@
 import Nav from '@/components/Nav';
 import './globals.css';
 import type { Metadata } from 'next';
-import Footer from '@/components/Footer';
-import ThemeContainer from '@/components/ThemeContainer';
-import useTheme from '@/utils/useTheme';
 import Loader from '@/components/Loader';
-import PageTransition from '@/components/PageTransition';
+import Footer from '@/components/Footer';
 
 export const metadata: Metadata = {
 	title: 'Create Next App',
@@ -18,15 +15,14 @@ export default function RootLayout({
 	children: React.ReactNode;
 }) {
 	return (
-		<html lang="en" className="dark">
+		<html lang="en">
 			<body className={`body`}>
 				<Loader />
+
 				<Nav />
-				<ThemeContainer>
-					<div className="page">{children}</div>
-				</ThemeContainer>
+
+				<div className="page">{children}</div>
 				<Footer />
-				<PageTransition />
 			</body>
 		</html>
 	);

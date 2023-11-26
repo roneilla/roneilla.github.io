@@ -32,8 +32,8 @@ const ThemeSwitcher = () => {
 	});
 	const centerCircleProps = useSpring({ r, config: properties.springConfig });
 	const maskedCircleProps = useSpring({
-		cx,
-		cy,
+		cx: cx,
+		cy: cy,
 		config: properties.springConfig,
 	});
 	const linesProps = useSpring({
@@ -64,13 +64,13 @@ const ThemeSwitcher = () => {
 				}}>
 				<mask id="myMask2">
 					<rect x="0" y="0" width="100%" height="100%" fill="white" />
-					<animated.circle style={maskedCircleProps} r="9" fill="black" />
+					<animated.circle cx={cx} cy={cy} r="9" fill="black" />
 				</mask>
 
 				<animated.circle
 					cx="12"
 					cy="12"
-					style={centerCircleProps}
+					r={r}
 					fill={color}
 					mask="url(#myMask2)"
 				/>

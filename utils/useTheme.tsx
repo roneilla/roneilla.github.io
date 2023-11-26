@@ -3,7 +3,7 @@
 import { useEffect, useState } from 'react';
 
 const useTheme = () => {
-	const [theme, setTheme] = useState<string>('');
+	const [theme, setTheme] = useState<string>('light');
 
 	useEffect(() => {
 		if (

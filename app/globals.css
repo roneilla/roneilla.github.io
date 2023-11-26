@@ -17,6 +17,29 @@
 	--background-end-rgb: 255, 255, 255;
 }
 
+/* width */
+::-webkit-scrollbar {
+	width: 6px;
+}
+
+/* Track */
+::-webkit-scrollbar-track {
+	@apply bg-white dark:bg-black;
+}
+
+/* Handle */
+::-webkit-scrollbar-thumb {
+	@apply border-white border border-solid;
+	background: #dcddfb;
+
+	border-radius: 50px;
+}
+
+/* Handle on hover */
+::-webkit-scrollbar-thumb:hover {
+	background: #dcddfb;
+}
+
 @media (prefers-color-scheme: dark) {
 	:root {
 		--foreground-rgb: 255, 255, 255;
@@ -25,16 +48,33 @@
 	}
 }
 
-body {
-	-webkit-font-smoothing: antialiased;
-	font-family: 'PP Neue Montreal', sans-serif;
+.svgLogo {
+	@apply fill-black dark:fill-white;
 }
 
-.buttonWithArrow {
-	border-radius: 100px;
-	background-color: #000000;
-	border: none;
-	color: #fff;
+body {
+	/* cursor: url('assets/arrow.png'), auto; */
+
+	-webkit-font-smoothing: antialiased;
+	font-family: 'PP Neue Montreal', sans-serif;
+
+	background: #dcddfb;
+}
+
+::selection {
+	background-color: #dcddfb;
+	color: black;
+}
+
+* {
+	transition: background-color 0.25s ease-in;
+}
+
+.button {
+	@apply rounded-full;
+	background-color: white;
+	border: 1px solid black;
+	color: black;
 	text-align: center;
 
 	font-size: 14px;
@@ -51,7 +91,7 @@ body {
 }
 
 .buttonWithArrow:after {
-	content: '→';
+	content: '←';
 	position: absolute;
 	opacity: 0;
 	top: 8px;
@@ -75,11 +115,11 @@ body {
 
 @layer components {
 	.h1 {
-		@apply text-5xl md:text-6xl;
+		@apply text-5xl sm:text-7xl;
 	}
 
 	.h2 {
-		@apply font-medium text-xl md:text-5xl;
+		@apply font-medium text-3xl sm:text-5xl;
 	}
 
 	.navlink {
@@ -87,15 +127,19 @@ body {
 	}
 
 	.page {
-		@apply max-w-screen-2xl mx-auto;
+		@apply max-w-screen-2xl mx-auto z-10 relative bg-white dark:bg-black pb-1;
+
+		border-radius: 0 0 30px 30px;
+
+		margin-bottom: 150px;
 	}
 
 	.section {
-		@apply p-4;
+		@apply w-full px-8 md:px-12 py-8;
 	}
 
 	.body {
-		@apply bg-white dark:bg-black text-black dark:text-white;
+		@apply text-black dark:text-white;
 	}
 }
 
@@ -108,35 +152,100 @@ body {
 	height: auto;
 	/* height: calc(33.33vw - 32px);
 	max-height: 300px; */
+	box-sizing: border-box;
+	transition: border 0.2s ease-in;
+}
+
+.workCardImg:hover {
+	/* border: 8px solid #dcddfb; */
 }
 
 .lightBoxImg {
 	width: auto;
-	max-height: calc(100vh - 48px);
+	max-height: calc(100vh - 4rem);
 	object-fit: contain;
 }
 
 .imgHeight {
 }
 
-.gifContainer {
-	@apply p-8 lg:p-16 flex items-center justify-center box-border;
+.imgContainer {
+	@apply p-8 lg:p-16 flex items-center justify-center box-border rounded;
 	max-height: calc(100vh - 8rem);
 }
 
-.gifContainer img {
+.phoneImg {
 	height: 100%;
 	width: auto;
+	max-height: calc(100vh - 12rem);
 }
 
-.pink {
+.sd-pink {
 	background-color: #f5bffa;
 }
 
-.blue {
+.sd-blue {
 	background-color: #bfdefc;
 }
 
-.purple {
+.sd-purple {
 	background-color: #e8c0fe;
+}
+
+.freshii-green {
+	background-color: #639760;
+}
+
+.tpol-yellow {
+	background-color: #f0c418;
+}
+
+.tpol-blue {
+	background-color: #4f73b6;
+}
+.trans {
+	top: 100vh;
+}
+
+.backdrop {
+	@apply fixed top-0 left-0 w-screen h-screen z-40 bg-black;
+}
+
+.lightbox {
+	@apply scale-0 fixed top-0 left-0 w-screen h-screen p-4 z-50 flex items-center justify-center flex-col origin-center;
+}
+
+.lightbox img {
+	@apply w-auto h-auto object-contain;
+	max-height: calc(100vh - 4rem);
+	max-height: 100%;
+}
+
+.navLogo {
+	max-height: 1.5rem;
+	width: auto;
+	cursor: pointer;
+}
+
+.footer {
+	@apply fixed bottom-0 w-full p-8 box-border flex  justify-between;
+
+	height: 150px;
+	background-color: #dcddfb;
+
+	z-index: 1;
+}
+
+.r-p1 {
+	background-color: #adaedd;
+}
+.r-p2 {
+	background-color: #dcddfb;
+}
+.r-p3 {
+	background-color: #f2f3fd;
+}
+
+.purple-border {
+	border-bottom: 1px solid #dcddfb;
 }
